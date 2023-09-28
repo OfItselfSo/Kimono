@@ -230,7 +230,7 @@ namespace Kimono
 
             if (doubleList.Count == 0)
             {
-                OISMessageBox("There is no data to display");
+         //       OISMessageBox("There is no data to display");
                 return null;
             }
 
