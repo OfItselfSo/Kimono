@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MonitorBlockProperties_Graph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SummaryString />
+  <DisplayName>g_FNDC#Net_CFC_AH</DisplayName>
+  <DataSource>FNDC#Net_CFC_AH</DataSource>
+  <TitleText>FNDC#Net_CFC_AH</TitleText>
+  <DaysToDisplay>2</DaysToDisplay>
+</MonitorBlockProperties_Graph>

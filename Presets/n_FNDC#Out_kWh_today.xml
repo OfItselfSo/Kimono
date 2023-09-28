@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MonitorBlockProperties_Number xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DisplayName>n_FNDC#Out_kWh_today</DisplayName>
+  <DataSource>FNDC#Out_kWh_today</DataSource>
+  <TitleText>FNDC#Out_kWh_today</TitleText>
+  <Suffix></Suffix>
+</MonitorBlockProperties_Number>

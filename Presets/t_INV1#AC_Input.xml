@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MonitorBlockProperties_Text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SummaryString />
+  <DisplayName>t_INV1#AC_Input</DisplayName>
+  <DataSource>INV1#AC_Input</DataSource>
+  <TitleText>INV1#AC_Input</TitleText>
+</MonitorBlockProperties_Text>

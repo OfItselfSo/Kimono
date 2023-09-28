@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MonitorBlockProperties_Text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SummaryString />
+  <DisplayName>t_CC1#Aux_mode</DisplayName>
+  <DataSource>CC1#Aux_mode</DataSource>
+  <TitleText>CC1#Aux_mode</TitleText>
+</MonitorBlockProperties_Text>

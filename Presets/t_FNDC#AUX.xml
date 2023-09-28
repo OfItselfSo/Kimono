@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MonitorBlockProperties_Text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SummaryString />
+  <DisplayName>t_FNDC#AUX</DisplayName>
+  <DataSource>FNDC#AUX</DataSource>
+  <TitleText>FNDC#AUX</TitleText>
+</MonitorBlockProperties_Text>

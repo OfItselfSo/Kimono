@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MonitorBlockProperties_Graph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SummaryString />
+  <DisplayName>g_FNDC#Shunt_A_AH</DisplayName>
+  <DataSource>FNDC#Shunt_A_AH</DataSource>
+  <TitleText>FNDC#Shunt_A_AH</TitleText>
+  <DaysToDisplay>2</DaysToDisplay>
+</MonitorBlockProperties_Graph>

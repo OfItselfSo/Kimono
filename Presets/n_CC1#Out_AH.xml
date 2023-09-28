@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MonitorBlockProperties_Number xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DisplayName>n_CC1#Out_AH</DisplayName>
+  <DataSource>CC1#Out_AH</DataSource>
+  <TitleText>CC1#Out_AH</TitleText>
+  <Suffix></Suffix>
+</MonitorBlockProperties_Number>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MonitorBlockProperties_Number xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DisplayName>n_INV1#VAC1_in_L2</DisplayName>
+  <DataSource>INV1#VAC1_in_L2</DataSource>
+  <TitleText>INV1#VAC1_in_L2</TitleText>
+  <Suffix></Suffix>
+</MonitorBlockProperties_Number>
