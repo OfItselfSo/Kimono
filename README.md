@@ -10,7 +10,7 @@ Although the Kimono software is simple to use, it incorporates quite a few inter
 sense of how to work with it. 
 
 The home page for this project can be found at [http://www.OfItselfSo.com/Kimono](http://www.OfItselfSo.com/Kimono). Please read the contents
-of that page for detailed information regarding the softwares capabilities and usage instructions. A binary file is also available for those who do not wish to compile the C# source themselves.
+of that page for detailed information regarding the softwares capabilities and usage instructions. A executable .exe file is also available to download for those who do not wish to compile the C# source themselves.
 
  
 
