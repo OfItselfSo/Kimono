@@ -97,6 +97,9 @@ namespace Kimono
             formsPlot1.Configuration.LockHorizontalAxis = true;
             formsPlot1.Configuration.LockVerticalAxis = true;
 
+            // we never want the benchmark to appear
+            Plot.Benchmark(false);
+
             // PlotTitle = DEFAULT_PLOT_TITLE;
             formsPlot1.Refresh();
 
