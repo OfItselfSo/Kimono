@@ -47,7 +47,12 @@ namespace Kimono
         private const string DEFAULT_CONFIG_FILENAME = "KimonoSettings.xml";
 
         // app constants
+#if DEBUG
+        // we give it a different directory in DEBUG for logging and settings
+        public const string APPLICATION_NAME = "KimonoX";
+#else
         public const string APPLICATION_NAME = "Kimono";
+#endif
         public const int APPLICATIION_MAJOR_VERSION = 0;
         public const int APPLICATIION_MINOR_VERSION = 90;
         public const string APPLICATION_VERSION = "00.91 beta";
