@@ -106,7 +106,7 @@ namespace Kimono
         public string Prefix { get => prefix; set => prefix = value; }
 
         [DataMember]
-        [DefaultValueAttribute("2")]
+        [DefaultValueAttribute(2)]
         [CategoryAttribute("Display"), DescriptionAttribute("The number of decimal places to use for the value on display.")]
         public int DecimalPlaces { get => decimalPlaces; set => decimalPlaces = value; }
 

@@ -36,6 +36,8 @@ namespace Kimono
     {
         private const string ERROR_STR = "#Err";
 
+        private Font defaultFont = null; 
+
         /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
         /// <summary>
         /// Constructor
@@ -45,6 +47,8 @@ namespace Kimono
             InitializeComponent();
             // set our properties now
             Properties = new MonitorBlockProperties_Number();
+            //set our default font
+            defaultFont = (Font)textBoxIntegerValue.Font.Clone();
         }
 
         /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
@@ -74,7 +78,12 @@ namespace Kimono
             // sanity check
             if ((Properties is MonitorBlockProperties_Number) == false) return;
             // set the integer data
-            textBoxIntegerValue.Text = FormatDisplayTextFromProperties();
+            string tmpText = FormatDisplayTextFromProperties();
+
+            Font outFont = Utils.AutoScaleFontToWidth(textBoxIntegerValue.Width, (Font)defaultFont.Clone(), tmpText);
+            if (outFont != null) textBoxIntegerValue.Font = outFont;
+
+            textBoxIntegerValue.Text = tmpText;
         }
 
         /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=

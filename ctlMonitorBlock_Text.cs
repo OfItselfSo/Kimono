@@ -34,6 +34,7 @@ namespace Kimono
     /// </summary>
     public partial class ctlMonitorBlock_Text : ctlMonitorBlock_Base
     {
+        private Font defaultFont = null;
 
         /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
         /// <summary>
@@ -44,6 +45,8 @@ namespace Kimono
             InitializeComponent();
             // set our properties now
             Properties = new MonitorBlockProperties_Text();
+            //set our default font
+            defaultFont = (Font)textBoxIntegerValue.Font.Clone();
         }
 
         /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
@@ -71,8 +74,14 @@ namespace Kimono
         {
             // sanity check
             if ((Properties is MonitorBlockProperties_Text) == false) return;
-            // set the integer data
-            textBoxIntegerValue.Text = FormatDisplayTextFromProperties();
+
+            // auto scale font size so the text appears in full
+            string tmpText = FormatDisplayTextFromProperties();
+            Font outFont = Utils.AutoScaleFontToWidth(textBoxIntegerValue.Width, (Font)defaultFont.Clone(), tmpText);
+            if (outFont != null) textBoxIntegerValue.Font = outFont;
+
+            // set the text data
+            textBoxIntegerValue.Text = tmpText;
         }
 
         /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=

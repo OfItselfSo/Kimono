@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,6 +39,40 @@ namespace Kimono
         public static DateTime FromEpochTime(double epochTime)
         {
             return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(epochTime);
+        }
+
+        /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+        /// <summary>
+        /// Scale font to width. We scale a font to a width so that the text is no 
+        /// longer than that width. Note the input font is NOT cloned() the caller
+        /// needs to do this if required.
+        /// 
+        /// Credit: https://stackoverflow.com/questions/791830/autoscale-font-in-a-textbox-control-so-that-its-as-big-as-possible-and-still-fit
+        /// 
+        /// </summary>
+        /// <param name="boxWidth">the width the text has to fit in</param>
+        /// <param name="fontToAdjust">the font we adjust. We do NOT clone this</param>
+        /// <param name="textToUse">the text we have to fit in place</param>
+        /// <returns>the scaled font, the old font for error or null for serious error</returns>
+        public static Font AutoScaleFontToWidth(float boxWidth, Font fontToAdjust, string textToUse)
+        {
+            if (boxWidth <= 0) return null;
+            if (textToUse == null) return null;
+            if ((textToUse.Length == 0)) return null;
+
+            float width = boxWidth * 0.99f;
+
+            Font tmpFont = fontToAdjust;
+            Size tempSize = System.Windows.Forms.TextRenderer.MeasureText(textToUse, tmpFont);
+
+            float widthRatio = width / tempSize.Width;
+
+            // just return the input font - use that again
+            if (boxWidth > tempSize.Width) return fontToAdjust;
+
+            tmpFont = new Font(tmpFont.FontFamily, (float)Math.Round(tmpFont.Size * widthRatio, 0), tmpFont.Style);
+
+            return tmpFont;
         }
 
     }
