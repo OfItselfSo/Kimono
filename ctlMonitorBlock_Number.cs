@@ -85,6 +85,7 @@ namespace Kimono
         {
             if ((Properties is MonitorBlockProperties_Number) == false) return "";
             MonitorBlockProperties_Number blockProperties = (MonitorBlockProperties_Number)Properties;
+
             StringBuilder sb = new StringBuilder();
             if (blockProperties.NumberValueIsValid == false)
             {
@@ -92,8 +93,13 @@ namespace Kimono
             }
             else
             {
+                // do we wish to round the display value
+                double tmpValue = blockProperties.NumberValue;
+                int decimalPlaces = blockProperties.DecimalPlaces;
+                if (decimalPlaces >= 0) tmpValue = Math.Round(tmpValue, decimalPlaces);
+               
                 sb.Append(blockProperties.Prefix);
-                sb.Append(blockProperties.NumberValue.ToString());
+                sb.Append(tmpValue.ToString());
                 sb.Append(blockProperties.Suffix);
             }
             return sb.ToString();

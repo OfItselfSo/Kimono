@@ -47,6 +47,7 @@ namespace Kimono
         private bool numberValueIsValid = true;
 
         // browsable attributes
+        private int decimalPlaces = 2;
         private string titleText = "Title Goes Here";
         private string suffix = "";
         private string prefix = "";
@@ -103,6 +104,11 @@ namespace Kimono
         [DefaultValueAttribute("")]
         [CategoryAttribute("Display"), DescriptionAttribute("A text suffix for the screen value. If present it will be prepended to the value on display.")]
         public string Prefix { get => prefix; set => prefix = value; }
+
+        [DataMember]
+        [DefaultValueAttribute("2")]
+        [CategoryAttribute("Display"), DescriptionAttribute("The number of decimal places to use for the value on display.")]
+        public int DecimalPlaces { get => decimalPlaces; set => decimalPlaces = value; }
 
         #endregion
 
