@@ -439,6 +439,7 @@ namespace Kimono
             // just run down what we know we have
             mbList.Add(new MonitorBlockProperties_Blank());
             mbList.Add(new MonitorBlockProperties_Graph());
+            mbList.Add(new MonitorBlockProperties_Integral());
             mbList.Add(new MonitorBlockProperties_Number());
             mbList.Add(new MonitorBlockProperties_Text());
             this.ctlMonitorBlockPicker1.MBList_Preset = mbList;
@@ -883,6 +884,50 @@ namespace Kimono
                     // sync the screen to the properties
                     blockObj.SyncData();
                 }
+                else if ((blockProperties is MonitorBlockProperties_Integral) == true)
+                {
+                    // we are dealing with a display mb, get what we need.
+                    string dataSource = (blockProperties as MonitorBlockProperties_Integral).DataSource;
+                    if (dataSource == null) continue;
+                    // strip off leading and trailing spaces
+                    string workingExpression = dataSource.Trim();
+                    //do we have a prefix which indicates we are to evaluate this dataname as an expression
+                    double outVal = 0;
+                    if (workingExpression.StartsWith(OutbackSystem.EVALUATE_DATA_PREFIX) == true)
+                    {
+                        // yes we do, evaluate the dataSource
+                        retBool = EvaluateDataSourceAsExpression(workingOutBackData, dataSource, out outVal);
+                        if (retBool == false)
+                        {
+                            // flag this
+                            (blockProperties as MonitorBlockProperties_Integral).NumberValueIsValid = false;
+                            // sync the screen to the properties
+                            blockObj.SyncData();
+                            continue; // failed
+                        }
+                    }
+                    else
+                    {
+                        // get the data value from the object as a constant
+                        retBool = workingOutBackData.GetDataFromOutbackSystemReportByDeviceAndFieldName_double(dataSource, out outVal);
+                        // did we succeed?
+                        if (retBool == false)
+                        {
+                            // flag this
+                            (blockProperties as MonitorBlockProperties_Integral).NumberValueIsValid = false;
+                            // sync the screen to the properties
+                            blockObj.SyncData();
+                            continue; // failed
+                        }
+                    }
+
+                   // we have the value. Update the control
+                   (blockProperties as MonitorBlockProperties_Integral).NumberValue = outVal;
+                    // flag this
+                    (blockProperties as MonitorBlockProperties_Integral).NumberValueIsValid = true;
+                    // sync the screen to the properties
+                    blockObj.SyncData();
+                }
                 else if ((blockProperties is MonitorBlockProperties_Number)==true)
                 {
                     // we are dealing with a display mb, get what we need.
@@ -1038,7 +1083,23 @@ namespace Kimono
             foreach (ctlMonitorBlock_Base mbObj in mbList)
             {
                 // only certain types have userRefs
-                if ((mbObj.Properties is MonitorBlockProperties_Number) == true)
+                if ((mbObj.Properties is MonitorBlockProperties_Integral) == true)
+                {
+                    string userRef = (mbObj.Properties as MonitorBlockProperties_Integral).UserReference;
+                    // do we even have a valid output value?
+                    if ((mbObj.Properties as MonitorBlockProperties_Integral).NumberValueIsValid == false) continue;
+                    if (userRef == null) continue;
+                    // we only accept userReferences that begin with a specific value
+                    if (userRef.StartsWith(PortStatus.USERDB_STORE_NUMBER_PREFIX) == false) continue;
+                    // ok we have a candidate, trye to set the data via reflection
+                    propertyInfo = userDataPort.GetType().GetProperty(userRef);
+                    // do we have that property in the userDataPort? This can be anything and the users
+                    // can set it to a value for their own use.
+                    if (propertyInfo == null) continue;
+                    // we have that property, set the value now, note we pull the accumulator here. Not the Number Value
+                    propertyInfo.SetValue(userDataPort, (mbObj.Properties as MonitorBlockProperties_Integral).LastDisplayValue);
+                }
+                else if ((mbObj.Properties is MonitorBlockProperties_Number) == true)
                 {
                     string userRef = (mbObj.Properties as MonitorBlockProperties_Number).UserReference;
                     // do we even have a valid output value?
@@ -1081,7 +1142,16 @@ namespace Kimono
             foreach (ctlMonitorBlock_Base mbObj in mbList)
             {
                 // only certain types have userRefs which return doubles
-                if ((mbObj.Properties is MonitorBlockProperties_Number) == true)
+                if ((mbObj.Properties is MonitorBlockProperties_Integral) == true)
+                {
+                    // check this one
+                    if ((mbObj.Properties as MonitorBlockProperties_Integral).UserReference == userRef)
+                    {
+                        outVal = (mbObj.Properties as MonitorBlockProperties_Integral).NumberValue;
+                        return true;
+                    }
+                }
+                else if ((mbObj.Properties is MonitorBlockProperties_Number) == true)
                 {
                     // check this one
                     if((mbObj.Properties as MonitorBlockProperties_Number).UserReference == userRef)
@@ -1561,6 +1631,15 @@ namespace Kimono
         /// </summary>
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            DialogResult dlgResult = OISMessageBox_YesNo("Do you really want to close Kimono?");
+            if(dlgResult != DialogResult.Yes)
+            {
+                // user cancelled
+                e.Cancel = true;
+                return;
+            }
+
+
             // this does it all
             Shutdown();
 
@@ -1808,6 +1887,10 @@ namespace Kimono
                     {
                         ser = new XmlSerializer(typeof(MonitorBlockProperties_Graph));
                     }
+                    else if (xmlText.Contains("MonitorBlockProperties_Integral"))
+                    {
+                        ser = new XmlSerializer(typeof(MonitorBlockProperties_Integral));
+                    }
                     else if (xmlText.Contains("MonitorBlockProperties_Number"))
                     {
                         ser = new XmlSerializer(typeof(MonitorBlockProperties_Number));
@@ -1939,6 +2022,10 @@ namespace Kimono
                     else if ((newMBObj is MonitorBlockProperties_Number) == true)
                     {
                         newMBCtl = new ctlMonitorBlock_Number();
+                    }
+                    else if ((newMBObj is MonitorBlockProperties_Integral) == true)
+                    {
+                        newMBCtl = new ctlMonitorBlock_Integral();
                     }
                     else if ((newMBObj is MonitorBlockProperties_Text) == true)
                     {

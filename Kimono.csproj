@@ -82,6 +82,12 @@
     <Compile Include="ctlMonitorBlock_Graph.Designer.cs">
       <DependentUpon>ctlMonitorBlock_Graph.cs</DependentUpon>
     </Compile>
+    <Compile Include="ctlMonitorBlock_Integral.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctlMonitorBlock_Integral.Designer.cs">
+      <DependentUpon>ctlMonitorBlock_Integral.cs</DependentUpon>
+    </Compile>
     <Compile Include="ctlMonitorBlock_Number.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -155,6 +161,7 @@
     <Compile Include="MonitorBlockProperties_Base.cs" />
     <Compile Include="MonitorBlockProperties_Blank.cs" />
     <Compile Include="MonitorBlockProperties_Graph.cs" />
+    <Compile Include="MonitorBlockProperties_Integral.cs" />
     <Compile Include="MonitorBlockProperties_Number.cs" />
     <Compile Include="MonitorBlockProperties_Text.cs" />
     <Compile Include="IntervalRecorder.cs" />
@@ -184,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ctlMonitorBlock_Graph.resx">
       <DependentUpon>ctlMonitorBlock_Graph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlMonitorBlock_Integral.resx">
+      <DependentUpon>ctlMonitorBlock_Integral.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ctlMonitorBlock_Number.resx">
       <DependentUpon>ctlMonitorBlock_Number.cs</DependentUpon>

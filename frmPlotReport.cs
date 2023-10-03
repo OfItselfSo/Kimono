@@ -370,6 +370,50 @@ namespace Kimono
                 RebuildTitleBasedOnPlots();
 
             }
+            else if ((propertiesIn is MonitorBlockProperties_Integral) == true)
+            {
+                string dataSource = (propertiesIn as MonitorBlockProperties_Integral).DataSource;
+                if (dataSource == null) return;
+                if (dataSource.Length == 0) return;
+
+                // set the device alias and the field name comboboxes
+                SetPlot1DeviceAndFieldFromDataSource(dataSource);
+                // did we set it properly? 
+                if (ctlDeviceAndFieldPicker1.DeviceAlias == KnownDeviceEnum.None.ToString())
+                {
+                    // no, user may be using a complex expression. We still might be able to plot
+                    // this if they are using a user defined data reference
+
+                    // Do we have a reference name for this and is it a reserved user data one
+                    string refName = (propertiesIn as MonitorBlockProperties_Integral).UserReference;
+                    if ((refName != null) && (refName.StartsWith(PortStatus.USERDB_STORE_NUMBER_PREFIX) == true))
+                    {
+                        // doesn't hurt to try
+                        ctlDeviceAndFieldPicker1.DeviceAlias = KnownDeviceEnum.USERDATA.ToString();
+                        ctlDeviceAndFieldPicker1.FieldName = refName.ToString();
+                    }
+                }
+
+                // set the interval, just assume 5 Min, number MB's do not have this field-
+                comboBoxDataInterval.SelectedItem = DataIntervalEnum.FIVE_MIN;
+
+                // set the dates
+
+                // the end date when coming off a monitor block is always today
+                EndDate = DateTime.Today.AddHours(23).AddMinutes(59).AddSeconds(59);
+                // the start date is the start of the day
+                int numDays = 1;
+                if (numDays <= 0) numDays = 1;
+                // zero base it for the math
+                numDays = numDays - 1;
+                // set it to the start of the day numDays ago
+                StartDate = EndDate.Date.AddDays(numDays * -1).AddHours(0).AddMinutes(0).AddSeconds(0);
+
+                // we should be all set. Do the plot
+                BuildAndSetPlot1AccordingToScreen();
+                RebuildTitleBasedOnPlots();
+
+            }
             else if ((propertiesIn is MonitorBlockProperties_Number) == true)
             {
                 string dataSource = (propertiesIn as MonitorBlockProperties_Number).DataSource;

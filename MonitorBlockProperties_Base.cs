@@ -38,6 +38,7 @@ namespace Kimono
     [KnownType(typeof(MonitorBlockProperties_Blank))]
     [KnownType(typeof(MonitorBlockProperties_Text))]
     [KnownType(typeof(MonitorBlockProperties_Graph))]
+    [KnownType(typeof(MonitorBlockProperties_Integral))]
     [KnownType(typeof(MonitorBlockProperties_Number))]
     [KnownType(typeof(MonitorBlockProperties_Base))]
 
