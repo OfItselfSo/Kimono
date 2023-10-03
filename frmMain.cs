@@ -1329,6 +1329,8 @@ namespace Kimono
         /// </summary>
         public void HeartBeatWorker()
         {
+            string workingJSONReport = "";
+
             LogMessage("Heartbeat Worker Starts");
 
             while (true)
@@ -1361,7 +1363,7 @@ namespace Kimono
                     // clear it down
                     OutbackSystemReport = null;
                     // fetch the outback data as JSON, traps its own errors
-                    string workingJSONReport = GetOutBackData();
+                    workingJSONReport = GetOutBackData();
                     if ((workingJSONReport != null) && (workingJSONReport.Length > 0))
                     {
                         // convert into nested objects, but do not make it globally available yet
@@ -1393,6 +1395,17 @@ namespace Kimono
 
                     // update the screen
                     UpdateScreenWithLatestOutbackData();
+                }
+                catch (JsonException jex)
+                {
+                    // log it
+                    LogMessage("JSON exception happened" + jex.Message);
+                    if(workingJSONReport!=null)
+                    {
+                        LogMessage("JSON is " + workingJSONReport);
+                    }
+                    UpdateStatusBar1ThreadSafe("Error reading data from Mate3s");
+                    // note we do NOT rethrow here
                 }
                 catch (Exception ex)
                 {

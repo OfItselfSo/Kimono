@@ -164,14 +164,18 @@ namespace Kimono
             }
             else
             {               
-                // do we wish to round the display value
                 double tmpValue = blockProperties.Accumulator;
                 // convert to hours (Accumulator is in seconds)
-                blockProperties.LastDisplayValue = tmpValue / NUMBER_OF_SECONDS_IN_AN_HOUR;
+                tmpValue = tmpValue / NUMBER_OF_SECONDS_IN_AN_HOUR;
 
+                // do we wish to round the display value
                 int decimalPlaces = blockProperties.DecimalPlaces;
-                if (decimalPlaces >= 0) blockProperties.LastDisplayValue = Math.Round(tmpValue, decimalPlaces);
-               
+                if (decimalPlaces >= 0) tmpValue = Math.Round(tmpValue, decimalPlaces);
+
+                // remember this now
+                blockProperties.LastDisplayValue = tmpValue;
+
+                // display what we have
                 sb.Append(blockProperties.Prefix);
                 sb.Append(blockProperties.LastDisplayValue.ToString());
                 sb.Append(blockProperties.Suffix);
