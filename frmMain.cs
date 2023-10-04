@@ -1096,7 +1096,7 @@ namespace Kimono
                     // do we have that property in the userDataPort? This can be anything and the users
                     // can set it to a value for their own use.
                     if (propertyInfo == null) continue;
-                    // we have that property, set the value now, note we pull the accumulator here. Not the Number Value
+                    // we have that property, set the value now, note we pull the last display value here. Not the Number Value
                     propertyInfo.SetValue(userDataPort, (mbObj.Properties as MonitorBlockProperties_Integral).LastDisplayValue);
                 }
                 else if ((mbObj.Properties is MonitorBlockProperties_Number) == true)
@@ -1147,7 +1147,7 @@ namespace Kimono
                     // check this one
                     if ((mbObj.Properties as MonitorBlockProperties_Integral).UserReference == userRef)
                     {
-                        outVal = (mbObj.Properties as MonitorBlockProperties_Integral).NumberValue;
+                        outVal = (mbObj.Properties as MonitorBlockProperties_Integral).LastDisplayValue;
                         return true;
                     }
                 }
