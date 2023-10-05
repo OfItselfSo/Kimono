@@ -28,84 +28,73 @@ namespace Kimono
 {
     /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
     /// <summary>
-    /// A class to provide properties for the ctlMonitorBlock_Integral class. An
+    /// A class to provide properties for the ctlMonitorBlock_Latch class. An
     /// object derived from MonitorBlockProperties_Base serves as the backing store which
     /// drives the propertyGrid behind each monitor block.
     /// </summary>
-    [KnownType(typeof(MonitorBlockProperties_Integral))]
+    [KnownType(typeof(MonitorBlockProperties_Latch))]
     [KnownType(typeof(MonitorBlockProperties_Base))]
     [DataContract]
     [Serializable]
-    public class MonitorBlockProperties_Integral : MonitorBlockProperties_Base
+    public class MonitorBlockProperties_Latch : MonitorBlockProperties_Base
     {
 
-        public const string MB_DEFAULT_DISPLAY_NAME = DEFAULT_DISPLAYNAME_PREFIX + " Integral";
+        public const string MB_DEFAULT_DISPLAY_NAME = DEFAULT_DISPLAYNAME_PREFIX + " Latch";
 
         // non browsable attributes
-        private double numberValue = 1;
+        private object lastValue = 1;
         // if false we had an error parsing this
-        private bool numberValueIsValid = true;
-
-        // this is the collected amounts we have found in valueIn*seconds
-        private double accumulator = 0;
-        private DateTime lastRecordedDateTime = DateTime.MaxValue;
-        private bool resetAtMidnite = true;
-        private DateTime lastResetTime = DateTime.Now;
-        // we store the last display value as a double before converting it to a string for actual display
-        private double lastDisplayValue = 0;
-
+        private bool lastValueIsValid = true;
+        private DateTime lastRecordedDateTime = DateTime.MinValue;
 
         // browsable attributes
-        private int decimalPlaces = 6;
         private string titleText = "Title Goes Here";
-        private string suffix = "";
-        private string prefix = "";
         private string dataSource = "Device#Field";
+        private string comparisonValue = "27.2";
         private string userReference = "";
+
+        private bool resetAtMidnite = true;
+        private MB_TriggerDirectionEnum triggerDirection = MB_TriggerDirectionEnum.NONE;
+        private MB_TriggerActionEnum triggerAction = MB_TriggerActionEnum.RECORD_FIRST;
+
+        private string displayTextNotTriggered = "False";
+        private string displayTextTriggered = "True";
 
         /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
         /// <summary>
         /// Constructor
         /// </summary>
-        public MonitorBlockProperties_Integral()
+        public MonitorBlockProperties_Latch()
         {
             // set the display name
             DisplayName = MB_DEFAULT_DISPLAY_NAME;
-            SummaryString = "Integral Monitor Block";
+            SummaryString = "Latch Monitor Block";
 
+        }
+
+        /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+        /// <summary>
+        /// Detects if we have ever triggered
+        /// </summary>
+        /// <returns>true - we have triggered at least once, false - we have not</returns>
+        public bool HasEverTriggered()
+        {
+            if (LastRecordedDateTime == DateTime.MinValue) return false;
+            return true;
         }
 
         #region NONBROWSABLE
 
         [System.Xml.Serialization.XmlIgnore]
         [Browsable(false)]
-        public double NumberValue { get => numberValue; set => numberValue = value; }
-
+        public object LastValue { get => lastValue; set => lastValue = value; }
         [System.Xml.Serialization.XmlIgnore]
         [Browsable(false)]
-        public bool NumberValueIsValid { get => numberValueIsValid; set => numberValueIsValid = value; }
-
-        [System.Xml.Serialization.XmlIgnore]
-        [Browsable(false)]
-        public double Accumulator { get => accumulator; set => accumulator = value; }
+        public bool LastValueIsValid { get => lastValueIsValid; set => lastValueIsValid = value; }
 
         [System.Xml.Serialization.XmlIgnore]
         [Browsable(false)]
         public DateTime LastRecordedDateTime { get => lastRecordedDateTime; set => lastRecordedDateTime = value; }
-
-        [System.Xml.Serialization.XmlIgnore]
-        [Browsable(false)]
-        public DateTime LastResetTime { get => lastResetTime; set => lastResetTime = value; }
-
-        /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
-        /// <summary>
-        /// Gets/Sets the last display value as a double. This can be the results
-        /// of calculations on the Accumulator and NumberValue. This is essentially
-        /// what is on the screen without all the prefix and suffix stuff
-        /// </summary>
-        [System.Xml.Serialization.XmlIgnore]
-        [Browsable(false)]
-        public double LastDisplayValue { get => lastDisplayValue; set => lastDisplayValue = value; }
 
         #endregion
 
@@ -118,19 +107,14 @@ namespace Kimono
         public string UserReference { get => userReference; set => userReference = value; }
 
         [DataMember]
+        [DefaultValueAttribute("27.2")]
+        [CategoryAttribute("Data"), DescriptionAttribute("The value against which we compare the incoming data presented by the DataSource.")]
+        public string ComparisonValue { get => comparisonValue; set => comparisonValue = value; }
+
+        [DataMember]
         [DefaultValueAttribute("Device#Field")]
         [CategoryAttribute("Data"), DescriptionAttribute("The device and field name which provides the source of the data. Can be a complex expression.")]
         public string DataSource { get => dataSource; set => dataSource = value; }
-
-        [DataMember]
-        [DefaultValueAttribute(true)]
-        [CategoryAttribute("Data"), DescriptionAttribute("If true the integration value will reset to zero at midnite.")]
-        public int DecimalPlaces { get => decimalPlaces; set => decimalPlaces = value; }
-
-        [DataMember]
-        [DefaultValueAttribute(true)]
-        [CategoryAttribute("Data"), DescriptionAttribute("If true the integration resets at midnite. If false it just keeps accumulating.")]
-        public bool ResetAtMidnite { get => resetAtMidnite; set => resetAtMidnite = value; }
 
         [DataMember]
         [DefaultValueAttribute("Title Goes Here")]
@@ -138,14 +122,31 @@ namespace Kimono
         public string TitleText { get => titleText; set => titleText = value; }
 
         [DataMember]
-        [DefaultValueAttribute("")]
-        [CategoryAttribute("Display"), DescriptionAttribute("A text suffix for the screen value. If present it will be appended to the value on display.")]
-        public string Suffix { get => suffix; set => suffix = value; }
+        [DefaultValueAttribute(true)]
+        [CategoryAttribute("Data"), DescriptionAttribute("If true the testing resets at midnite. If false it just keeps testing.")]
+        public bool ResetAtMidnite { get => resetAtMidnite; set => resetAtMidnite = value; }
 
         [DataMember]
-        [DefaultValueAttribute("")]
-        [CategoryAttribute("Display"), DescriptionAttribute("A text suffix for the screen value. If present it will be prepended to the value on display.")]
-        public string Prefix { get => prefix; set => prefix = value; }
+        [DefaultValueAttribute(MB_TriggerDirectionEnum.NONE)]
+        [CategoryAttribute("Data"), DescriptionAttribute("Determines the trigger direction for the tests. None disables the monitor block.")]
+        public MB_TriggerDirectionEnum TriggerDirection { get => triggerDirection; set => triggerDirection = value; }
+
+        [DataMember]
+        [DefaultValueAttribute(MB_TriggerActionEnum.RECORD_FIRST)]
+        [CategoryAttribute("Data"), DescriptionAttribute("Determines the action when triggering.")]
+        public MB_TriggerActionEnum TriggerAction { get => triggerAction; set => triggerAction = value; }
+
+        [DataMember]
+        [DefaultValueAttribute("False")]
+        [CategoryAttribute("Display"), DescriptionAttribute("The text displayed if the trigger event has not occurred.")]
+        public string DisplayTextNotTriggered { get => displayTextNotTriggered; set => displayTextNotTriggered = value; }
+
+
+        [DataMember]
+        [DefaultValueAttribute("True")]
+        [CategoryAttribute("Display"), DescriptionAttribute("The text displayed if the trigger event has occurred.")]
+        public string DisplayTextTriggered { get => displayTextTriggered; set => displayTextTriggered = value; }
+
 
         #endregion
 

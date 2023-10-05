@@ -88,6 +88,12 @@
     <Compile Include="ctlMonitorBlock_Integral.Designer.cs">
       <DependentUpon>ctlMonitorBlock_Integral.cs</DependentUpon>
     </Compile>
+    <Compile Include="ctlMonitorBlock_Latch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctlMonitorBlock_Latch.Designer.cs">
+      <DependentUpon>ctlMonitorBlock_Latch.cs</DependentUpon>
+    </Compile>
     <Compile Include="ctlMonitorBlock_Number.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -113,6 +119,8 @@
     <Compile Include="frmMonitorBlockProperties.Designer.cs">
       <DependentUpon>frmMonitorBlockProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="MB_TriggerActionEnum.cs" />
+    <Compile Include="MB_TriggerDirectionEnum.cs" />
     <Compile Include="KnownDeviceTextFieldsCCEnum.cs" />
     <Compile Include="KnownDeviceTextFieldsFNDCEnum.cs" />
     <Compile Include="KnownDeviceTextFieldsINVEnum.cs" />
@@ -162,6 +170,7 @@
     <Compile Include="MonitorBlockProperties_Blank.cs" />
     <Compile Include="MonitorBlockProperties_Graph.cs" />
     <Compile Include="MonitorBlockProperties_Integral.cs" />
+    <Compile Include="MonitorBlockProperties_Latch.cs" />
     <Compile Include="MonitorBlockProperties_Number.cs" />
     <Compile Include="MonitorBlockProperties_Text.cs" />
     <Compile Include="IntervalRecorder.cs" />
@@ -194,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ctlMonitorBlock_Integral.resx">
       <DependentUpon>ctlMonitorBlock_Integral.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlMonitorBlock_Latch.resx">
+      <DependentUpon>ctlMonitorBlock_Latch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ctlMonitorBlock_Number.resx">
       <DependentUpon>ctlMonitorBlock_Number.cs</DependentUpon>
