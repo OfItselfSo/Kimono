@@ -116,6 +116,12 @@
     <Compile Include="frmGetIPAddress.Designer.cs">
       <DependentUpon>frmGetIPAddress.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmUserDataRefSummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserDataRefSummary.Designer.cs">
+      <DependentUpon>frmUserDataRefSummary.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMonitorBlockProperties.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,7 @@
     <Compile Include="IPAddressControl.Designer.cs">
       <DependentUpon>IPAddressControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserDataRefSummaryContainer.cs" />
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="ctlDeviceAndFieldPicker.resx">
       <DependentUpon>ctlDeviceAndFieldPicker.cs</DependentUpon>
@@ -227,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserDataRefSummary.resx">
+      <DependentUpon>frmUserDataRefSummary.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMonitorBlockProperties.resx">
       <DependentUpon>frmMonitorBlockProperties.cs</DependentUpon>

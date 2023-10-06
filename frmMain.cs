@@ -152,7 +152,7 @@ namespace Kimono
         /// <summary>
         /// Constructor
         /// </summary>
-        public frmMain() 
+        public frmMain()
         {
             bool retBOOL = false;
 
@@ -321,7 +321,7 @@ namespace Kimono
 
             // start the heartbeat, this updates the screen
             StartHeartbeatThread();
-            
+
             // reset this, it changes when the saved configuration is loaded
             summaryScreenLayoutChanged = false;
         }
@@ -351,7 +351,7 @@ namespace Kimono
         {
             get
             {
-                if(markerRecorder==null) markerRecorder = new IntervalRecorder();
+                if (markerRecorder == null) markerRecorder = new IntervalRecorder();
                 return markerRecorder;
             }
         }
@@ -393,7 +393,7 @@ namespace Kimono
         private void EnsureOutputDirExists()
         {
             // test to see if it exists
-            if(Directory.Exists(OutputDir)==false)
+            if (Directory.Exists(OutputDir) == false)
             {
                 // create it.
                 Directory.CreateDirectory(OutputDir);
@@ -410,7 +410,7 @@ namespace Kimono
             get
             {
                 // if not valid, set it to a valid default
-                if ((outputDir == null) || (outputDir.Length < 6) || (Path.IsPathRooted(outputDir)==false)) 
+                if ((outputDir == null) || (outputDir.Length < 6) || (Path.IsPathRooted(outputDir) == false))
                 {
                     outputDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), APPLICATION_NAME);
                 }
@@ -643,7 +643,7 @@ namespace Kimono
         {
             // Check the summary tab monitor blocks
             List<ctlMonitorBlock_Base> mbList = FindAllMonitorBlocksOnSummaryTabPage();
-            foreach(ctlMonitorBlock_Base mbObj in mbList)
+            foreach (ctlMonitorBlock_Base mbObj in mbList)
             {
                 // we only need one
                 if (mbObj.PropertiesHaveChanged == true) return true;
@@ -816,7 +816,7 @@ namespace Kimono
                 {
 
                     // this is the stuff we get from the devstatus nested object
-                    if(OutbackSystemReport.devstatus != null)
+                    if (OutbackSystemReport.devstatus != null)
                     {
                         // set the last report time
                         DateTime reportTime = Utils.FromEpochTime(OutbackSystemReport.devstatus.Sys_Time);
@@ -873,7 +873,7 @@ namespace Kimono
                         if (retBool == false) continue; // failed
                     }
                     else
-                    { 
+                    {
                         // get the data value from the object as a constant
                         retBool = workingOutBackData.GetDataFromOutbackSystemReportByDeviceAndFieldName_double(dataSource, out outVal);
                         // did we succeed?
@@ -929,7 +929,7 @@ namespace Kimono
                     // sync the screen to the properties
                     blockObj.SyncData();
                 }
-                else if ((blockProperties is MonitorBlockProperties_Number)==true)
+                else if ((blockProperties is MonitorBlockProperties_Number) == true)
                 {
                     // we are dealing with a display mb, get what we need.
                     string dataSource = (blockProperties as MonitorBlockProperties_Number).DataSource;
@@ -1001,7 +1001,7 @@ namespace Kimono
                         (blockProperties as MonitorBlockProperties_Latch).LastValueIsValid = true;
                         // sync the screen to the properties
                         blockObj.SyncData();
-                        continue; 
+                        continue;
                     }
                     else
                     {
@@ -1078,7 +1078,7 @@ namespace Kimono
         private bool EvaluateDataSourceAsExpression(OutbackSystem workingOutBackData, string dataSource, out double retDouble)
         {
             retDouble = 0;
-            bool retBool=false;
+            bool retBool = false;
 
             try
             {
@@ -1106,7 +1106,7 @@ namespace Kimono
                     string tmpVarStr = varStr.Replace(OutbackSystem.DATASOURCE_DELIMTER_ALPHANUM, OutbackSystem.DATASOURCE_DELIMTER_STR);
                     tmpVarStr = tmpVarStr.Replace(OutbackSystem.USRREF_DELIMTER_ALPHANUM, OutbackSystem.USRREF_DELIMTER_STR);
                     double outVal = 0;
-                    if(tmpVarStr.Contains(OutbackSystem.USRREF_DELIMTER_STR)==true)
+                    if (tmpVarStr.Contains(OutbackSystem.USRREF_DELIMTER_STR) == true)
                     {
                         // the user is referencing the output of another Monitor Block
                         retBool = GetDataFromMonitorBlocksByUserRef_double(tmpVarStr, out outVal);
@@ -1240,7 +1240,7 @@ namespace Kimono
                 else if ((mbObj.Properties is MonitorBlockProperties_Number) == true)
                 {
                     // check this one
-                    if((mbObj.Properties as MonitorBlockProperties_Number).UserReference == userRef)
+                    if ((mbObj.Properties as MonitorBlockProperties_Number).UserReference == userRef)
                     {
                         outVal = (mbObj.Properties as MonitorBlockProperties_Number).NumberValue;
                         return true;
@@ -1345,7 +1345,7 @@ namespace Kimono
                 heartbeatThread.Abort();
             }
             catch { }
-            heartbeatThread = null;            
+            heartbeatThread = null;
         }
 
         /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
@@ -1495,7 +1495,7 @@ namespace Kimono
                 {
                     // log it
                     LogMessage("JSON exception happened" + jex.Message);
-                    if(workingJSONReport!=null)
+                    if (workingJSONReport != null)
                     {
                         LogMessage("JSON is " + workingJSONReport);
                     }
@@ -1683,7 +1683,7 @@ namespace Kimono
                         frmGetIPAddress frmIPAddr = new frmGetIPAddress();
                         frmIPAddr.IPAddress = this.IPAddress;
                         frmIPAddr.ShowDialog();
-                        if(frmIPAddr.DialogResult == DialogResult.OK)
+                        if (frmIPAddr.DialogResult == DialogResult.OK)
                         {
                             // set the IP address
                             IPAddress = frmIPAddr.IPAddress;
@@ -1802,7 +1802,7 @@ namespace Kimono
                 }
 
                 // close the database
-                if(DBManager != null) DBManager.CloseConnection();
+                if (DBManager != null) DBManager.CloseConnection();
             }
             catch (Exception ex)
             {
@@ -1912,7 +1912,7 @@ namespace Kimono
 
             // open the db file, this also creates it if it does not exist
             retBool = DBManagerIn.OpenConnection();
-            if(retBool == false)
+            if (retBool == false)
             {
                 // the connection did not open, remove the DBManager
                 LogMessage("DB coonnection could not open, closing the db manager");
@@ -1960,19 +1960,19 @@ namespace Kimono
                 LogMessage("Null or empty preset directory");
                 return;
             }
-            LogMessage("LoadAllPresets preset dir is >"+ presetDirPath+ "<");
+            LogMessage("LoadAllPresets preset dir is >" + presetDirPath + "<");
             // the dir has to exist
             if (Directory.Exists(presetDirPath) == false)
             {
-                LogMessage("Invalid preset dir>" + presetDirPath+"<");
+                LogMessage("Invalid preset dir>" + presetDirPath + "<");
                 return;
             }
             // now read all files
             FileInfo[] files = null;
             try
             {
-                DirectoryInfo d = new DirectoryInfo(presetDirPath); 
-                files = d.GetFiles("*.xml"); 
+                DirectoryInfo d = new DirectoryInfo(presetDirPath);
+                files = d.GetFiles("*.xml");
             }
             catch (Exception ex)
             {
@@ -2026,7 +2026,7 @@ namespace Kimono
                         // now add it to the preset list
                         presetList.Add(mbObj);
                     }
-                 }
+                }
             }
             catch (Exception ex)
             {
@@ -2176,7 +2176,7 @@ namespace Kimono
 
                     // occasionally when we replace we want to remove the original from a source
                     // usually this is when it comes in via a dragdrop
-                    if(newMBObj.WantUsrPickerDeleteOnDrop == true)
+                    if (newMBObj.WantUsrPickerDeleteOnDrop == true)
                     {
                         // the User MB Picker wants a delete
                         ctlMonitorBlockPicker1.RemoveFromUsrPickerListByObject(newMBObj);
@@ -2187,7 +2187,7 @@ namespace Kimono
                     // for safetys sake if we are dropping on a non blank MB we move the
                     // target to the user defined list. That way the user can get it back
                     // if they need to
-                    if (((targetMBCtl is ctlMonitorBlock_Blank)==false) && (targetMBCtl.Properties.IsAutoGenerated==false))
+                    if (((targetMBCtl is ctlMonitorBlock_Blank) == false) && (targetMBCtl.Properties.IsAutoGenerated == false))
                     {
                         // add the mb
                         ctlMonitorBlockPicker1.MBList_UserDefined.Add(targetMBCtl.Properties);
@@ -2276,7 +2276,7 @@ namespace Kimono
         {
             LogMessage("SetReplaceMonitorBlockDelegateOnActiveBlocks");
             List<ctlMonitorBlock_Base> mbList = FindAllMonitorBlocksOnSummaryTabPage();
-            foreach(ctlMonitorBlock_Base mbObj in mbList)
+            foreach (ctlMonitorBlock_Base mbObj in mbList)
             {
                 mbObj.ReplaceMonitorBlock = new ReplaceMonitorBlockDelegate(HandleReplaceMonitorBlock);
             }
@@ -2303,7 +2303,7 @@ namespace Kimono
         private void CreateInitialMonitorBlocksOnSummaryTabPage()
         {
             LogMessage("CreateBlankMonitorBlocksOnSummaryTabPage");
-            for(int row=0; row<NumberOfMBRows; row++)
+            for (int row = 0; row < NumberOfMBRows; row++)
             {
                 ctlMonitorBlock_Base baseMBObj = null;
                 for (int col = 0; col < NumberOfMBRows; col++)
@@ -2536,12 +2536,12 @@ namespace Kimono
 
             MonitorBlockProperties_Base dropItemMBOriginal = ddObj.MBObj;
             // who sent us this, this determines our actions
-            if((ddObj.Sender is ctlMonitorBlock_Base)==true)
+            if ((ddObj.Sender is ctlMonitorBlock_Base) == true)
             {
                 // it was a control on the summary screen
                 this.HandleDeleteMonitorBlock(dropItemMBOriginal);
             }
-            else if ((ddObj.Sender is ctlMonitorBlockPicker)== true)
+            else if ((ddObj.Sender is ctlMonitorBlockPicker) == true)
             {
                 // it was a ctlMonitorBlockPicker. This is an MB obj
                 // being removed from the User Def List
@@ -2580,6 +2580,76 @@ namespace Kimono
         {
             frmPlotReport frmPlot = new frmPlotReport();
             frmPlot.Show();
+        }
+
+        /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+        /// <summary>
+        /// Starts up the userdata summary dialog box
+        /// </summary>
+        private void buttonUserDataSummary_Click(object sender, EventArgs e)
+        {
+            PropertyInfo propertyInfo = null;
+
+            // first we populate the UserDataRefSummaryContainer
+            UserDataRefSummaryContainer udCont = new UserDataRefSummaryContainer();
+
+            // now go through each monitor block
+            List<ctlMonitorBlock_Base> mbList = FindAllMonitorBlocksOnSummaryTabPage();
+            foreach (ctlMonitorBlock_Base mbObj in mbList)
+            {
+                // only certain types have userRefs
+                if ((mbObj.Properties is MonitorBlockProperties_Integral) == true)
+                {
+                    string userRef = (mbObj.Properties as MonitorBlockProperties_Integral).UserReference;
+                    if (userRef == null) continue;
+                    // we only accept userReferences that begin with a specific value
+                    if (userRef.StartsWith(PortStatus.USERDB_STORE_NUMBER_PREFIX) == false) continue;
+                    // ok we have a candidate, try to set the data via reflection
+                    propertyInfo = udCont.GetType().GetProperty(userRef);
+                    // do we have that property in the UserDataRefSummaryContainer? This can be anything and the users
+                    // can set it to a value for their own use.
+                    if (propertyInfo == null) continue;
+                    // we have that property, set the title as the value now
+                    propertyInfo.SetValue(udCont, (mbObj.Properties as MonitorBlockProperties_Integral).TitleText);
+                }
+                else if ((mbObj.Properties is MonitorBlockProperties_Number) == true)
+                {
+                    string userRef = (mbObj.Properties as MonitorBlockProperties_Number).UserReference;
+                    if (userRef == null) continue;
+                    // we only accept userReferences that begin with a specific value
+                    if (userRef.StartsWith(PortStatus.USERDB_STORE_NUMBER_PREFIX) == false) continue;
+                    // ok we have a candidate, trye to set the data via reflection
+                    propertyInfo = udCont.GetType().GetProperty(userRef);
+                    // do we have that property in the userDataPort? This can be anything and the users
+                    // can set it to a value for their own use.
+                    if (propertyInfo == null) continue;
+                    // we have that property, set the title as the value now
+                    propertyInfo.SetValue(udCont, (mbObj.Properties as MonitorBlockProperties_Number).TitleText);
+                }
+                //else if ((mbObj.Properties is MonitorBlockProperties_Text) == true)
+                //{
+                //    string userRef = (mbObj.Properties as MonitorBlockProperties_Text).UserReference;
+                //    if (userRef == null) continue;
+                //    // we only accept userReferences that begin with a specific value
+                //    if (userRef.StartsWith(PortStatus.USERDB_STORE_NUMBER_PREFIX) == false) continue;
+                //    // ok we have a candidate, trye to set the data via reflection
+                //    propertyInfo = udCont.GetType().GetProperty(userRef);
+                //    // do we have that property in the userDataPort? This can be anything and the users
+                //    // can set it to a value for their own use.
+                //    if (propertyInfo == null) continue;
+                //    // we have that property, set the title as the value now
+                //    propertyInfo.SetValue(udCont, (mbObj.Properties as MonitorBlockProperties_Text).TitleText);
+                //}
+            }
+
+            // now start the property display form
+            // yes, display the properties form
+            frmUserDataRefSummary frmProp = new frmUserDataRefSummary();
+            // give it to the form
+            frmProp.Properties = udCont;
+            // display it modally, it is read only so we do not trap the Dialog Result
+            frmProp.ShowDialog();
+ 
         }
     }
 }

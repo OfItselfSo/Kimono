@@ -66,6 +66,7 @@
             this.buttonSetupTab = new System.Windows.Forms.Button();
             this.ctlMonitorBlockPicker1 = new Kimono.ctlMonitorBlockPicker();
             this.buttonTrashCan = new System.Windows.Forms.Button();
+            this.buttonUserDataSummary = new System.Windows.Forms.Button();
             this.tabControlMainForm.SuspendLayout();
             this.tabPageSystemConfiguration.SuspendLayout();
             this.SuspendLayout();
@@ -121,6 +122,7 @@
             // 
             // tabPageSystemConfiguration
             // 
+            this.tabPageSystemConfiguration.Controls.Add(this.buttonUserDataSummary);
             this.tabPageSystemConfiguration.Controls.Add(this.label11);
             this.tabPageSystemConfiguration.Controls.Add(this.label10);
             this.tabPageSystemConfiguration.Controls.Add(this.checkBoxDisableDBWrites);
@@ -148,7 +150,7 @@
             this.tabPageSystemConfiguration.Controls.Add(this.textBoxLogFileDir);
             this.tabPageSystemConfiguration.Location = new System.Drawing.Point(4, 5);
             this.tabPageSystemConfiguration.Name = "tabPageSystemConfiguration";
-            this.tabPageSystemConfiguration.Size = new System.Drawing.Size(627, 536);
+            this.tabPageSystemConfiguration.Size = new System.Drawing.Size(627, 539);
             this.tabPageSystemConfiguration.TabIndex = 3;
             this.tabPageSystemConfiguration.Text = "Config";
             this.tabPageSystemConfiguration.UseVisualStyleBackColor = true;
@@ -156,7 +158,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(18, 404);
+            this.label11.Location = new System.Drawing.Point(18, 436);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(259, 13);
             this.label11.TabIndex = 23;
@@ -165,7 +167,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(16, 368);
+            this.label10.Location = new System.Drawing.Point(16, 400);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(264, 13);
             this.label10.TabIndex = 22;
@@ -174,7 +176,7 @@
             // checkBoxDisableDBWrites
             // 
             this.checkBoxDisableDBWrites.AutoSize = true;
-            this.checkBoxDisableDBWrites.Location = new System.Drawing.Point(33, 421);
+            this.checkBoxDisableDBWrites.Location = new System.Drawing.Point(33, 453);
             this.checkBoxDisableDBWrites.Name = "checkBoxDisableDBWrites";
             this.checkBoxDisableDBWrites.Size = new System.Drawing.Size(112, 17);
             this.checkBoxDisableDBWrites.TabIndex = 21;
@@ -184,7 +186,7 @@
             // checkBoxDisableMonitorBlockRefresh
             // 
             this.checkBoxDisableMonitorBlockRefresh.AutoSize = true;
-            this.checkBoxDisableMonitorBlockRefresh.Location = new System.Drawing.Point(33, 384);
+            this.checkBoxDisableMonitorBlockRefresh.Location = new System.Drawing.Point(33, 416);
             this.checkBoxDisableMonitorBlockRefresh.Name = "checkBoxDisableMonitorBlockRefresh";
             this.checkBoxDisableMonitorBlockRefresh.Size = new System.Drawing.Size(169, 17);
             this.checkBoxDisableMonitorBlockRefresh.TabIndex = 20;
@@ -476,6 +478,16 @@
             this.buttonTrashCan.DragDrop += new System.Windows.Forms.DragEventHandler(this.buttonTrashCan_DragDrop);
             this.buttonTrashCan.DragOver += new System.Windows.Forms.DragEventHandler(this.buttonTrashCan_DragOver);
             // 
+            // buttonUserDataSummary
+            // 
+            this.buttonUserDataSummary.Location = new System.Drawing.Point(21, 351);
+            this.buttonUserDataSummary.Name = "buttonUserDataSummary";
+            this.buttonUserDataSummary.Size = new System.Drawing.Size(155, 23);
+            this.buttonUserDataSummary.TabIndex = 24;
+            this.buttonUserDataSummary.Text = "&UserData Summary...";
+            this.buttonUserDataSummary.UseVisualStyleBackColor = true;
+            this.buttonUserDataSummary.Click += new System.EventHandler(this.buttonUserDataSummary_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -547,6 +559,7 @@
         private System.Windows.Forms.CheckBox checkBoxDisableDBWrites;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button buttonUserDataSummary;
     }
 }
 
