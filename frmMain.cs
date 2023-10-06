@@ -1739,6 +1739,8 @@ namespace Kimono
         /// </summary>
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+#if DEBUG
+#else
             DialogResult dlgResult = OISMessageBox_YesNo("Do you really want to close Kimono?");
             if(dlgResult != DialogResult.Yes)
             {
@@ -1746,7 +1748,7 @@ namespace Kimono
                 e.Cancel = true;
                 return;
             }
-
+#endif
 
             // this does it all
             Shutdown();
