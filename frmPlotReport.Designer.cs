@@ -299,6 +299,7 @@ namespace Kimono
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "frmPlotReport";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Plot Report";
             this.ResumeLayout(false);
             this.PerformLayout();
