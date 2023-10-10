@@ -438,8 +438,10 @@ namespace Kimono
             List<MonitorBlockProperties_Base> mbList = new List<MonitorBlockProperties_Base>();
             // just run down what we know we have
             mbList.Add(new MonitorBlockProperties_Blank());
+            mbList.Add(new MonitorBlockProperties_Bool());
             mbList.Add(new MonitorBlockProperties_Graph());
             mbList.Add(new MonitorBlockProperties_Integral());
+            mbList.Add(new MonitorBlockProperties_MinMax());
             mbList.Add(new MonitorBlockProperties_Number());
             mbList.Add(new MonitorBlockProperties_Latch());
             mbList.Add(new MonitorBlockProperties_Text());
@@ -857,7 +859,76 @@ namespace Kimono
 
                 // there can be various types of block object. We find out what we are 
                 // dealing with.
-                if ((blockProperties is MonitorBlockProperties_Graph) == true)
+                if ((blockProperties is MonitorBlockProperties_Bool) == true)
+                {
+                    double outDouble = 0;
+                    string outString = "";
+                    // we are dealing with a display mb, get what we need.
+                    string dataSource = (blockProperties as MonitorBlockProperties_Bool).DataSource;
+                    if (dataSource == null) continue;
+                    // strip off leading and trailing spaces
+                    string workingExpression = dataSource.Trim();
+                    //do we have a prefix which indicates we are to evaluate this dataname as an expression
+                    if (workingExpression.StartsWith(OutbackSystem.EVALUATE_DATA_PREFIX) == true)
+                    {
+                        // yes we do, evaluate the dataSource
+                        retBool = EvaluateDataSourceAsExpression(workingOutBackData, dataSource, out outDouble);
+                        if (retBool == false)
+                        {
+                            // flag this
+                            (blockProperties as MonitorBlockProperties_Bool).LastValueIsValid = false;
+                            // sync the screen to the properties
+                            blockObj.SyncData();
+                            continue; // failed
+                        }
+                        // we have the value. Update the control
+                        (blockProperties as MonitorBlockProperties_Bool).LastValue = outDouble;
+                        // flag this
+                        (blockProperties as MonitorBlockProperties_Bool).LastValueIsValid = true;
+                        // sync the screen to the properties
+                        blockObj.SyncData();
+                        continue;
+                    }
+                    else
+                    {
+                        // get the data value from the object as a double
+                        retBool = workingOutBackData.GetDataFromOutbackSystemReportByDeviceAndFieldName_double(dataSource, out outDouble);
+                        // did we succeed?
+                        if (retBool == false)
+                        {
+                            // no, maybe it is a string, get the data value from the object as a string
+                            retBool = workingOutBackData.GetDataFromOutbackSystemReportByDeviceAndFieldName_string(dataSource, out outString);
+                            if (retBool == true)
+                            {
+                                // we have the value. Update the control
+                                (blockProperties as MonitorBlockProperties_Bool).LastValue = outString;
+                                // flag this
+                                (blockProperties as MonitorBlockProperties_Bool).LastValueIsValid = true;
+                                // sync the screen to the properties
+                                blockObj.SyncData();
+                                continue;
+
+                            }
+                            // failed on both, flag this
+                            (blockProperties as MonitorBlockProperties_Bool).LastValueIsValid = false;
+                            // sync the screen to the properties
+                            blockObj.SyncData();
+                            continue; // failed
+                        }
+                        else
+                        {
+                            // we have the double value. Update the control
+                            (blockProperties as MonitorBlockProperties_Bool).LastValue = outDouble;
+                            // flag this
+                            (blockProperties as MonitorBlockProperties_Bool).LastValueIsValid = true;
+                            // sync the screen to the properties
+                            blockObj.SyncData();
+                            continue;
+                        }
+                    }
+
+                }
+                else if ((blockProperties is MonitorBlockProperties_Graph) == true)
                 {
                     // we are dealing with a display mb, get what we need.
                     string dataSource = (blockProperties as MonitorBlockProperties_Graph).DataSource;
@@ -928,6 +999,44 @@ namespace Kimono
                     (blockProperties as MonitorBlockProperties_Integral).NumberValueIsValid = true;
                     // sync the screen to the properties
                     blockObj.SyncData();
+                }
+                else if ((blockProperties is MonitorBlockProperties_MinMax) == true)
+                {
+                    double outDouble = 0;
+                    // we are dealing with a display mb, get what we need.
+                    string dataSource = (blockProperties as MonitorBlockProperties_MinMax).DataSource;
+                    if (dataSource == null) continue;
+                    // strip off leading and trailing spaces
+                    string workingExpression = dataSource.Trim();
+                    if (workingExpression.StartsWith(OutbackSystem.EVALUATE_DATA_PREFIX) == true)
+                    {
+                        // yes we do, evaluate the dataSource
+                        retBool = EvaluateDataSourceAsExpression(workingOutBackData, dataSource, out outDouble);
+                        if (retBool == false)
+                        {
+                            // sync the screen to the properties
+                            blockObj.SyncData();
+                            continue; // failed
+                        }
+                    }
+                    else
+                    {
+                        // get the data value from the object as a double
+                        retBool = workingOutBackData.GetDataFromOutbackSystemReportByDeviceAndFieldName_double(dataSource, out outDouble);
+                        // did we succeed?
+                        if (retBool == false)
+                        {
+                            // sync the screen to the properties
+                            blockObj.SyncData();
+                            continue; // failed
+                        }
+                    }
+                    // we have the double value. Update the control
+                    (blockProperties as MonitorBlockProperties_MinMax).LastValue = outDouble;
+                    // sync the screen to the properties
+                    blockObj.SyncData();
+                    continue;
+
                 }
                 else if ((blockProperties is MonitorBlockProperties_Number) == true)
                 {
@@ -1153,6 +1262,22 @@ namespace Kimono
             foreach (ctlMonitorBlock_Base mbObj in mbList)
             {
                 // only certain types have userRefs
+                //if ((mbObj.Properties is MonitorBlockProperties_Bool) == true)
+                //{
+                //    string userRef = (mbObj.Properties as MonitorBlockProperties_Bool).UserReference;
+                //    // do we even have a valid output value?
+                //    if ((mbObj.Properties as MonitorBlockProperties_Bool).NumberValueIsValid == false) continue;
+                //    if (userRef == null) continue;
+                //    // we only accept userReferences that begin with a specific value
+                //    if (userRef.StartsWith(PortStatus.USERDB_STORE_NUMBER_PREFIX) == false) continue;
+                //    // ok we have a candidate, trye to set the data via reflection
+                //    propertyInfo = userDataPort.GetType().GetProperty(userRef);
+                //    // do we have that property in the userDataPort? This can be anything and the users
+                //    // can set it to a value for their own use.
+                //    if (propertyInfo == null) continue;
+                //    // we have that property, set the value now
+                //    propertyInfo.SetValue(userDataPort, (mbObj.Properties as MonitorBlockProperties_Bool).NumberValue);
+                //}
                 if ((mbObj.Properties is MonitorBlockProperties_Integral) == true)
                 {
                     string userRef = (mbObj.Properties as MonitorBlockProperties_Integral).UserReference;
@@ -1169,6 +1294,22 @@ namespace Kimono
                     // we have that property, set the value now, note we pull the last display value here. Not the Number Value
                     propertyInfo.SetValue(userDataPort, (mbObj.Properties as MonitorBlockProperties_Integral).LastDisplayValue);
                 }
+                //else if ((mbObj.Properties is MonitorBlockProperties_MinMax) == true)
+                //{
+                //    string userRef = (mbObj.Properties as MonitorBlockProperties_MinMax).UserReference;
+                //    // do we even have a valid output value?
+                //    if ((mbObj.Properties as MonitorBlockProperties_MinMax).NumberValueIsValid == false) continue;
+                //    if (userRef == null) continue;
+                //    // we only accept userReferences that begin with a specific value
+                //    if (userRef.StartsWith(PortStatus.USERDB_STORE_NUMBER_PREFIX) == false) continue;
+                //    // ok we have a candidate, trye to set the data via reflection
+                //    propertyInfo = userDataPort.GetType().GetProperty(userRef);
+                //    // do we have that property in the userDataPort? This can be anything and the users
+                //    // can set it to a value for their own use.
+                //    if (propertyInfo == null) continue;
+                //    // we have that property, set the value now
+                //    propertyInfo.SetValue(userDataPort, (mbObj.Properties as MonitorBlockProperties_MinMax).NumberValue);
+                //}
                 else if ((mbObj.Properties is MonitorBlockProperties_Number) == true)
                 {
                     string userRef = (mbObj.Properties as MonitorBlockProperties_Number).UserReference;
@@ -1993,6 +2134,10 @@ namespace Kimono
                     {
                         ser = new XmlSerializer(typeof(MonitorBlockProperties_Blank));
                     }
+                    else if (xmlText.Contains("MonitorBlockProperties_Bool"))
+                    {
+                        ser = new XmlSerializer(typeof(MonitorBlockProperties_Bool));
+                    }
                     else if (xmlText.Contains("MonitorBlockProperties_Graph"))
                     {
                         ser = new XmlSerializer(typeof(MonitorBlockProperties_Graph));
@@ -2000,6 +2145,10 @@ namespace Kimono
                     else if (xmlText.Contains("MonitorBlockProperties_Integral"))
                     {
                         ser = new XmlSerializer(typeof(MonitorBlockProperties_Integral));
+                    }
+                    else if (xmlText.Contains("MonitorBlockProperties_MinMax"))
+                    {
+                        ser = new XmlSerializer(typeof(MonitorBlockProperties_MinMax));
                     }
                     else if (xmlText.Contains("MonitorBlockProperties_Number"))
                     {
@@ -2129,6 +2278,10 @@ namespace Kimono
                     {
                         newMBCtl = new ctlMonitorBlock_Blank();
                     }
+                    else if ((newMBObj is MonitorBlockProperties_Bool) == true)
+                    {
+                        newMBCtl = new ctlMonitorBlock_Bool();
+                    }
                     else if ((newMBObj is MonitorBlockProperties_Graph) == true)
                     {
                         newMBCtl = new ctlMonitorBlock_Graph();
@@ -2136,6 +2289,10 @@ namespace Kimono
                     else if ((newMBObj is MonitorBlockProperties_Integral) == true)
                     {
                         newMBCtl = new ctlMonitorBlock_Integral();
+                    }
+                    else if ((newMBObj is MonitorBlockProperties_MinMax) == true)
+                    {
+                        newMBCtl = new ctlMonitorBlock_MinMax();
                     }
                     else if ((newMBObj is MonitorBlockProperties_Number) == true)
                     {

@@ -36,8 +36,10 @@ namespace Kimono
     /// drives the propertyGrid behind each monitor block.
     /// </summary>
     [KnownType(typeof(MonitorBlockProperties_Blank))]
+    [KnownType(typeof(MonitorBlockProperties_Bool))]
     [KnownType(typeof(MonitorBlockProperties_Graph))]
     [KnownType(typeof(MonitorBlockProperties_Integral))]
+    [KnownType(typeof(MonitorBlockProperties_MinMax))]
     [KnownType(typeof(MonitorBlockProperties_Number))]
     [KnownType(typeof(MonitorBlockProperties_Latch))]
     [KnownType(typeof(MonitorBlockProperties_Text))]

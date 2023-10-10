@@ -91,6 +91,18 @@
     <Compile Include="ctlMonitorBlock_Integral.Designer.cs">
       <DependentUpon>ctlMonitorBlock_Integral.cs</DependentUpon>
     </Compile>
+    <Compile Include="ctlMonitorBlock_Bool.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctlMonitorBlock_Bool.Designer.cs">
+      <DependentUpon>ctlMonitorBlock_Bool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ctlMonitorBlock_MinMax.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctlMonitorBlock_MinMax.Designer.cs">
+      <DependentUpon>ctlMonitorBlock_MinMax.cs</DependentUpon>
+    </Compile>
     <Compile Include="ctlMonitorBlock_Latch.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -110,6 +122,7 @@
       <DependentUpon>ctlMonitorBlock_Text.cs</DependentUpon>
     </Compile>
     <Compile Include="DataDateEndpontEnum.cs" />
+    <Compile Include="DoubleRecord.cs" />
     <Compile Include="frmGetIPAddress.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,6 +192,8 @@
     <Compile Include="MonitorBlockProperties_Blank.cs" />
     <Compile Include="MonitorBlockProperties_Graph.cs" />
     <Compile Include="MonitorBlockProperties_Integral.cs" />
+    <Compile Include="MonitorBlockProperties_Bool.cs" />
+    <Compile Include="MonitorBlockProperties_MinMax.cs" />
     <Compile Include="MonitorBlockProperties_Latch.cs" />
     <Compile Include="MonitorBlockProperties_Number.cs" />
     <Compile Include="MonitorBlockProperties_Text.cs" />
@@ -213,6 +228,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ctlMonitorBlock_Integral.resx">
       <DependentUpon>ctlMonitorBlock_Integral.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlMonitorBlock_Bool.resx">
+      <DependentUpon>ctlMonitorBlock_Bool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlMonitorBlock_MinMax.resx">
+      <DependentUpon>ctlMonitorBlock_MinMax.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ctlMonitorBlock_Latch.resx">
       <DependentUpon>ctlMonitorBlock_Latch.cs</DependentUpon>
