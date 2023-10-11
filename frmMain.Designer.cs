@@ -34,6 +34,7 @@
             this.tabControlMainForm = new System.Windows.Forms.TabControl();
             this.tabPageMonitorBlocks = new System.Windows.Forms.TabPage();
             this.tabPageSystemConfiguration = new System.Windows.Forms.TabPage();
+            this.buttonUserDataSummary = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.checkBoxDisableDBWrites = new System.Windows.Forms.CheckBox();
@@ -66,7 +67,6 @@
             this.buttonSetupTab = new System.Windows.Forms.Button();
             this.ctlMonitorBlockPicker1 = new Kimono.ctlMonitorBlockPicker();
             this.buttonTrashCan = new System.Windows.Forms.Button();
-            this.buttonUserDataSummary = new System.Windows.Forms.Button();
             this.tabControlMainForm.SuspendLayout();
             this.tabPageSystemConfiguration.SuspendLayout();
             this.SuspendLayout();
@@ -74,7 +74,7 @@
             // buttonMonitorBlocksTab
             // 
             this.buttonMonitorBlocksTab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonMonitorBlocksTab.Location = new System.Drawing.Point(639, 90);
+            this.buttonMonitorBlocksTab.Location = new System.Drawing.Point(840, 90);
             this.buttonMonitorBlocksTab.Name = "buttonMonitorBlocksTab";
             this.buttonMonitorBlocksTab.Size = new System.Drawing.Size(140, 23);
             this.buttonMonitorBlocksTab.TabIndex = 1;
@@ -87,7 +87,7 @@
             this.textBoxStatusBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxStatusBar1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxStatusBar1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxStatusBar1.Location = new System.Drawing.Point(8, 549);
+            this.textBoxStatusBar1.Location = new System.Drawing.Point(8, 550);
             this.textBoxStatusBar1.Multiline = true;
             this.textBoxStatusBar1.Name = "textBoxStatusBar1";
             this.textBoxStatusBar1.ReadOnly = true;
@@ -103,10 +103,10 @@
             this.tabControlMainForm.Controls.Add(this.tabPageMonitorBlocks);
             this.tabControlMainForm.Controls.Add(this.tabPageSystemConfiguration);
             this.tabControlMainForm.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabControlMainForm.Location = new System.Drawing.Point(0, 2);
+            this.tabControlMainForm.Location = new System.Drawing.Point(0, 0);
             this.tabControlMainForm.Name = "tabControlMainForm";
             this.tabControlMainForm.SelectedIndex = 0;
-            this.tabControlMainForm.Size = new System.Drawing.Size(635, 548);
+            this.tabControlMainForm.Size = new System.Drawing.Size(836, 548);
             this.tabControlMainForm.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlMainForm.TabIndex = 5;
             // 
@@ -115,7 +115,7 @@
             this.tabPageMonitorBlocks.Location = new System.Drawing.Point(4, 5);
             this.tabPageMonitorBlocks.Name = "tabPageMonitorBlocks";
             this.tabPageMonitorBlocks.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMonitorBlocks.Size = new System.Drawing.Size(627, 539);
+            this.tabPageMonitorBlocks.Size = new System.Drawing.Size(828, 539);
             this.tabPageMonitorBlocks.TabIndex = 0;
             this.tabPageMonitorBlocks.Text = "tabPage1";
             this.tabPageMonitorBlocks.UseVisualStyleBackColor = true;
@@ -150,10 +150,20 @@
             this.tabPageSystemConfiguration.Controls.Add(this.textBoxLogFileDir);
             this.tabPageSystemConfiguration.Location = new System.Drawing.Point(4, 5);
             this.tabPageSystemConfiguration.Name = "tabPageSystemConfiguration";
-            this.tabPageSystemConfiguration.Size = new System.Drawing.Size(627, 539);
+            this.tabPageSystemConfiguration.Size = new System.Drawing.Size(827, 539);
             this.tabPageSystemConfiguration.TabIndex = 3;
             this.tabPageSystemConfiguration.Text = "Config";
             this.tabPageSystemConfiguration.UseVisualStyleBackColor = true;
+            // 
+            // buttonUserDataSummary
+            // 
+            this.buttonUserDataSummary.Location = new System.Drawing.Point(21, 351);
+            this.buttonUserDataSummary.Name = "buttonUserDataSummary";
+            this.buttonUserDataSummary.Size = new System.Drawing.Size(155, 23);
+            this.buttonUserDataSummary.TabIndex = 24;
+            this.buttonUserDataSummary.Text = "&UserData Summary...";
+            this.buttonUserDataSummary.UseVisualStyleBackColor = true;
+            this.buttonUserDataSummary.Click += new System.EventHandler(this.buttonUserDataSummary_Click);
             // 
             // label11
             // 
@@ -398,7 +408,7 @@
             this.buttonAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAbout.Image = global::Kimono.Properties.Resources.kimono_icon_s;
             this.buttonAbout.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonAbout.Location = new System.Drawing.Point(639, 7);
+            this.buttonAbout.Location = new System.Drawing.Point(840, 7);
             this.buttonAbout.Name = "buttonAbout";
             this.buttonAbout.Size = new System.Drawing.Size(140, 77);
             this.buttonAbout.TabIndex = 6;
@@ -410,7 +420,7 @@
             // buttonSaveSetup
             // 
             this.buttonSaveSetup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSaveSetup.Location = new System.Drawing.Point(639, 506);
+            this.buttonSaveSetup.Location = new System.Drawing.Point(840, 504);
             this.buttonSaveSetup.Name = "buttonSaveSetup";
             this.buttonSaveSetup.Size = new System.Drawing.Size(140, 25);
             this.buttonSaveSetup.TabIndex = 9;
@@ -421,7 +431,7 @@
             // buttonClose
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClose.Location = new System.Drawing.Point(639, 534);
+            this.buttonClose.Location = new System.Drawing.Point(840, 532);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(139, 25);
             this.buttonClose.TabIndex = 10;
@@ -435,17 +445,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxStatusBar2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxStatusBar2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxStatusBar2.Location = new System.Drawing.Point(317, 549);
+            this.textBoxStatusBar2.Location = new System.Drawing.Point(317, 550);
             this.textBoxStatusBar2.Multiline = true;
             this.textBoxStatusBar2.Name = "textBoxStatusBar2";
             this.textBoxStatusBar2.ReadOnly = true;
-            this.textBoxStatusBar2.Size = new System.Drawing.Size(313, 14);
+            this.textBoxStatusBar2.Size = new System.Drawing.Size(514, 14);
             this.textBoxStatusBar2.TabIndex = 12;
             // 
             // buttonSetupTab
             // 
             this.buttonSetupTab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSetupTab.Location = new System.Drawing.Point(639, 118);
+            this.buttonSetupTab.Location = new System.Drawing.Point(840, 118);
             this.buttonSetupTab.Name = "buttonSetupTab";
             this.buttonSetupTab.Size = new System.Drawing.Size(140, 25);
             this.buttonSetupTab.TabIndex = 13;
@@ -455,14 +465,13 @@
             // 
             // ctlMonitorBlockPicker1
             // 
-            this.ctlMonitorBlockPicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.ctlMonitorBlockPicker1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ctlMonitorBlockPicker1.ChangesHaveBeenMade = false;
-            this.ctlMonitorBlockPicker1.Location = new System.Drawing.Point(639, 152);
+            this.ctlMonitorBlockPicker1.Location = new System.Drawing.Point(840, 152);
             this.ctlMonitorBlockPicker1.MinimumSize = new System.Drawing.Size(140, 150);
             this.ctlMonitorBlockPicker1.Name = "ctlMonitorBlockPicker1";
-            this.ctlMonitorBlockPicker1.Size = new System.Drawing.Size(143, 297);
+            this.ctlMonitorBlockPicker1.Size = new System.Drawing.Size(143, 295);
             this.ctlMonitorBlockPicker1.TabIndex = 11;
             // 
             // buttonTrashCan
@@ -470,7 +479,7 @@
             this.buttonTrashCan.AllowDrop = true;
             this.buttonTrashCan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonTrashCan.Image = global::Kimono.Properties.Resources.trashcan;
-            this.buttonTrashCan.Location = new System.Drawing.Point(672, 445);
+            this.buttonTrashCan.Location = new System.Drawing.Point(873, 443);
             this.buttonTrashCan.Name = "buttonTrashCan";
             this.buttonTrashCan.Size = new System.Drawing.Size(75, 41);
             this.buttonTrashCan.TabIndex = 14;
@@ -478,21 +487,11 @@
             this.buttonTrashCan.DragDrop += new System.Windows.Forms.DragEventHandler(this.buttonTrashCan_DragDrop);
             this.buttonTrashCan.DragOver += new System.Windows.Forms.DragEventHandler(this.buttonTrashCan_DragOver);
             // 
-            // buttonUserDataSummary
-            // 
-            this.buttonUserDataSummary.Location = new System.Drawing.Point(21, 351);
-            this.buttonUserDataSummary.Name = "buttonUserDataSummary";
-            this.buttonUserDataSummary.Size = new System.Drawing.Size(155, 23);
-            this.buttonUserDataSummary.TabIndex = 24;
-            this.buttonUserDataSummary.Text = "&UserData Summary...";
-            this.buttonUserDataSummary.UseVisualStyleBackColor = true;
-            this.buttonUserDataSummary.Click += new System.EventHandler(this.buttonUserDataSummary_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 564);
+            this.ClientSize = new System.Drawing.Size(989, 566);
             this.Controls.Add(this.buttonTrashCan);
             this.Controls.Add(this.buttonSetupTab);
             this.Controls.Add(this.ctlMonitorBlockPicker1);
@@ -503,14 +502,14 @@
             this.Controls.Add(this.buttonMonitorBlocksTab);
             this.Controls.Add(this.textBoxStatusBar1);
             this.Controls.Add(this.textBoxStatusBar2);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(0, 0);
-            this.MaximumSize = new System.Drawing.Size(800, 603);
-            this.MinimumSize = new System.Drawing.Size(800, 603);
+            this.MaximumSize = new System.Drawing.Size(1005, 605);
+            this.MinimumSize = new System.Drawing.Size(1005, 605);
             this.Name = "frmMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "Kimono: Simple Monitoring for Outback Solar Systems";
+            this.Text = "Kimono: Monitoring for Outback Solar Systems";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Shown += new System.EventHandler(this.frmMain_Shown);
             this.tabControlMainForm.ResumeLayout(false);

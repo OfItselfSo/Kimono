@@ -53,9 +53,9 @@ namespace Kimono
 #else
         public const string APPLICATION_NAME = "Kimono";
 #endif
-        public const int APPLICATIION_MAJOR_VERSION = 0;
-        public const int APPLICATIION_MINOR_VERSION = 90;
-        public const string APPLICATION_VERSION = "00.91 beta";
+        public const int APPLICATIION_MAJOR_VERSION = 1;
+        public const int APPLICATIION_MINOR_VERSION = 0;
+        public const string APPLICATION_VERSION = "01.00";
         private const string APPLICATION_HOME = @"http://www.OfItselfSo.com/Kimono/Kimono.php";
 
         private const string WARN01 = "The Kimono software is released under the MIT License. There";
@@ -122,7 +122,7 @@ namespace Kimono
         private bool pauseAllNonFormThreads = false;
 
         private const int DEFAULT_NUM_MB_ROWS = 5;
-        private const int DEFAULT_NUM_MB_COLS = 3;
+        private const int DEFAULT_NUM_MB_COLS = 4;
         private int numberOfMBRows = DEFAULT_NUM_MB_ROWS;
         private int numberOfMBCols = DEFAULT_NUM_MB_COLS;
 
@@ -2463,18 +2463,18 @@ namespace Kimono
             for (int row = 0; row < NumberOfMBRows; row++)
             {
                 ctlMonitorBlock_Base baseMBObj = null;
-                for (int col = 0; col < NumberOfMBRows; col++)
+                for (int col = 0; col < NumberOfMBCols; col++)
                 {
                     // there are certain special cases where we display a hard coded MB
                     // this is so the user has something to see on the screen even at defaults
                     if ((row == 0) && (col == 0)) baseMBObj = CreateHardCoded_Sys_Batt_V_MonitorBlock();
                     else baseMBObj = new ctlMonitorBlock_Blank();
 
-                    int rowLoc = (row * MB_BLOCK_WIDTH) + (row * MB_BLOCK_SEPARATION);
-                    int colLoc = (col * MB_BLOCK_HEIGHT) + (col * MB_BLOCK_SEPARATION);
+                    int rowLoc = (row * MB_BLOCK_HEIGHT) + (row * MB_BLOCK_SEPARATION);
+                    int colLoc = (col * MB_BLOCK_WIDTH) + (col * MB_BLOCK_SEPARATION);
 
                     // set the position
-                    baseMBObj.Location = new Point(rowLoc, colLoc);
+                    baseMBObj.Location = new Point(colLoc, rowLoc);
                     tabPageMonitorBlocks.Controls.Add(baseMBObj);
                     // init it
                     baseMBObj.SyncDisplayToProperties();
