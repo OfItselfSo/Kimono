@@ -54,8 +54,8 @@ namespace Kimono
         public const string APPLICATION_NAME = "Kimono";
 #endif
         public const int APPLICATIION_MAJOR_VERSION = 1;
-        public const int APPLICATIION_MINOR_VERSION = 0;
-        public const string APPLICATION_VERSION = "01.00";
+        public const int APPLICATIION_MINOR_VERSION = 1;
+        public const string APPLICATION_VERSION = "01.01";
         private const string APPLICATION_HOME = @"http://www.OfItselfSo.com/Kimono/Kimono.php";
 
         private const string WARN01 = "The Kimono software is released under the MIT License. There";
