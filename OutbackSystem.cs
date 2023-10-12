@@ -142,6 +142,9 @@ namespace Kimono
             // add it to the port list
             devstatus.ports.Add(UserDataPort);
 
+            // counters
+            int ccNumber = 1;
+            int invNumber = 1;
             // we loop through the ports. 
             foreach (PortStatus portObject in devstatus.ports)
             {
@@ -157,12 +160,9 @@ namespace Kimono
                     // set this now
                     PrimaryFNDCPort = portObject;
                     PrimaryFNDCPort.DeviceAlias = DEVALIAS_FNDC;
-                    // no need to carry on
-                    break;
                 }
 
                 // now the Charge Controllers. We collect them all in order
-                int ccNumber = 1;
                 if (portObject.Dev == PortStatus.DEVICE_IDENTIFIER_CC)
                 {
                     // set this now
@@ -172,7 +172,6 @@ namespace Kimono
                 }
 
                 // now the Inverters. We collect them all in order
-                int invNumber = 1;
                 if (portObject.Dev == PortStatus.DEVICE_IDENTIFIER_FXR)
                 {
                     // set this now

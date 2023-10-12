@@ -408,6 +408,7 @@ namespace Kimono
         {
             if (outbackReport == null) return;
             if (portObj == null) return;
+            if(portObj.DeviceAlias==null) return;
 
             if (portObj.DeviceAlias == OutbackSystem.DEVALIAS_MATE3S)
             {
