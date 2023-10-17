@@ -54,8 +54,8 @@ namespace Kimono
         public const string APPLICATION_NAME = "Kimono";
 #endif
         public const int APPLICATIION_MAJOR_VERSION = 1;
-        public const int APPLICATIION_MINOR_VERSION = 1;
-        public const string APPLICATION_VERSION = "01.01";
+        public const int APPLICATIION_MINOR_VERSION = 2;
+        public const string APPLICATION_VERSION = "01.02";
         private const string APPLICATION_HOME = @"http://www.OfItselfSo.com/Kimono/Kimono.php";
 
         private const string WARN01 = "The Kimono software is released under the MIT License. There";
@@ -2623,7 +2623,6 @@ namespace Kimono
             //GeneratePresetsFromEnum("t_DEVALIAS#FIELDNAME.xml", "Kimono.MB_TextXMLTemplate.txt", "FNDC", typeof(KnownDeviceTextFieldsFNDCEnum));
             //// MATE3S
             //GeneratePresetsFromEnum("t_DEVALIAS#FIELDNAME.xml", "Kimono.MB_TextXMLTemplate.txt", "MATE3S", typeof(KnownDeviceTextFieldsMATE3SEnum));
-
 
 #else
             this.Close();

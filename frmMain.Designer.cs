@@ -42,7 +42,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.ipAddressControl1 = new Kimono.IPAddressControl();
             this.buttonPlotReport = new System.Windows.Forms.Button();
             this.buttonShowRawJSON = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -65,8 +64,9 @@
             this.buttonClose = new System.Windows.Forms.Button();
             this.textBoxStatusBar2 = new System.Windows.Forms.TextBox();
             this.buttonSetupTab = new System.Windows.Forms.Button();
-            this.ctlMonitorBlockPicker1 = new Kimono.ctlMonitorBlockPicker();
             this.buttonTrashCan = new System.Windows.Forms.Button();
+            this.ctlMonitorBlockPicker1 = new Kimono.ctlMonitorBlockPicker();
+            this.ipAddressControl1 = new Kimono.IPAddressControl();
             this.tabControlMainForm.SuspendLayout();
             this.tabPageSystemConfiguration.SuspendLayout();
             this.SuspendLayout();
@@ -130,7 +130,6 @@
             this.tabPageSystemConfiguration.Controls.Add(this.textBox1);
             this.tabPageSystemConfiguration.Controls.Add(this.label9);
             this.tabPageSystemConfiguration.Controls.Add(this.label8);
-            this.tabPageSystemConfiguration.Controls.Add(this.ipAddressControl1);
             this.tabPageSystemConfiguration.Controls.Add(this.buttonPlotReport);
             this.tabPageSystemConfiguration.Controls.Add(this.buttonShowRawJSON);
             this.tabPageSystemConfiguration.Controls.Add(this.label6);
@@ -148,9 +147,10 @@
             this.tabPageSystemConfiguration.Controls.Add(this.buttonOpenLogFileDir);
             this.tabPageSystemConfiguration.Controls.Add(this.label1);
             this.tabPageSystemConfiguration.Controls.Add(this.textBoxLogFileDir);
+            this.tabPageSystemConfiguration.Controls.Add(this.ipAddressControl1);
             this.tabPageSystemConfiguration.Location = new System.Drawing.Point(4, 5);
             this.tabPageSystemConfiguration.Name = "tabPageSystemConfiguration";
-            this.tabPageSystemConfiguration.Size = new System.Drawing.Size(827, 539);
+            this.tabPageSystemConfiguration.Size = new System.Drawing.Size(828, 539);
             this.tabPageSystemConfiguration.TabIndex = 3;
             this.tabPageSystemConfiguration.Text = "Config";
             this.tabPageSystemConfiguration.UseVisualStyleBackColor = true;
@@ -232,14 +232,6 @@
             this.label8.Size = new System.Drawing.Size(108, 13);
             this.label8.TabIndex = 17;
             this.label8.Text = "IP Address of Mate3s";
-            // 
-            // ipAddressControl1
-            // 
-            this.ipAddressControl1.IPAddress = "0.0.0.0";
-            this.ipAddressControl1.Location = new System.Drawing.Point(311, 215);
-            this.ipAddressControl1.Name = "ipAddressControl1";
-            this.ipAddressControl1.Size = new System.Drawing.Size(198, 26);
-            this.ipAddressControl1.TabIndex = 16;
             // 
             // buttonPlotReport
             // 
@@ -463,17 +455,6 @@
             this.buttonSetupTab.UseVisualStyleBackColor = true;
             this.buttonSetupTab.Click += new System.EventHandler(this.buttonSetupTab_Click);
             // 
-            // ctlMonitorBlockPicker1
-            // 
-            this.ctlMonitorBlockPicker1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ctlMonitorBlockPicker1.ChangesHaveBeenMade = false;
-            this.ctlMonitorBlockPicker1.Location = new System.Drawing.Point(840, 152);
-            this.ctlMonitorBlockPicker1.MinimumSize = new System.Drawing.Size(140, 150);
-            this.ctlMonitorBlockPicker1.Name = "ctlMonitorBlockPicker1";
-            this.ctlMonitorBlockPicker1.Size = new System.Drawing.Size(143, 295);
-            this.ctlMonitorBlockPicker1.TabIndex = 11;
-            // 
             // buttonTrashCan
             // 
             this.buttonTrashCan.AllowDrop = true;
@@ -486,6 +467,25 @@
             this.buttonTrashCan.UseVisualStyleBackColor = true;
             this.buttonTrashCan.DragDrop += new System.Windows.Forms.DragEventHandler(this.buttonTrashCan_DragDrop);
             this.buttonTrashCan.DragOver += new System.Windows.Forms.DragEventHandler(this.buttonTrashCan_DragOver);
+            // 
+            // ctlMonitorBlockPicker1
+            // 
+            this.ctlMonitorBlockPicker1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ctlMonitorBlockPicker1.ChangesHaveBeenMade = false;
+            this.ctlMonitorBlockPicker1.Location = new System.Drawing.Point(840, 152);
+            this.ctlMonitorBlockPicker1.MinimumSize = new System.Drawing.Size(140, 150);
+            this.ctlMonitorBlockPicker1.Name = "ctlMonitorBlockPicker1";
+            this.ctlMonitorBlockPicker1.Size = new System.Drawing.Size(143, 295);
+            this.ctlMonitorBlockPicker1.TabIndex = 11;
+            // 
+            // ipAddressControl1
+            // 
+            this.ipAddressControl1.IPAddress = "0.0.0.0";
+            this.ipAddressControl1.Location = new System.Drawing.Point(311, 215);
+            this.ipAddressControl1.Name = "ipAddressControl1";
+            this.ipAddressControl1.Size = new System.Drawing.Size(198, 26);
+            this.ipAddressControl1.TabIndex = 16;
             // 
             // frmMain
             // 
@@ -502,10 +502,9 @@
             this.Controls.Add(this.buttonMonitorBlocksTab);
             this.Controls.Add(this.textBoxStatusBar1);
             this.Controls.Add(this.textBoxStatusBar2);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(0, 0);
-            this.MaximumSize = new System.Drawing.Size(1005, 605);
+            this.MaximumSize = new System.Drawing.Size(1015, 615);
             this.MinimumSize = new System.Drawing.Size(1005, 605);
             this.Name = "frmMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;

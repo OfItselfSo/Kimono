@@ -114,10 +114,10 @@ namespace Kimono
         /// <param name="numDaysToKeep">remove all records older than this number of days</param>
         public void ClearOldRecordsMax(int numDaysToKeep)
         {
-            // note: we go in reverse so the index does not change under us
+            // note: we go in reverse so the index do not change under us
             for (int i = RecordListMax.Count - 1; i >= 0; i--)
             {
-                if ((RecordListMax[i].DateTimeValue - DateTime.Now).TotalDays < numDaysToKeep) continue;
+                if ((DateTime.Now.Date - RecordListMax[i].DateTimeValue.Date).Days < numDaysToKeep) continue;
                 // too old, remove it
                 RecordListMax.RemoveAt(i);
             }
@@ -130,10 +130,10 @@ namespace Kimono
         /// <param name="numDaysToKeep">remove all records older than this number of days</param>
         public void ClearOldRecordsMin(int numDaysToKeep)
         {
-            // note: we go in reverse so the index does not change under us
+            // note: we go in reverse so the index do not change under us
             for (int i = RecordListMin.Count - 1; i >= 0; i--)
             {
-                if ((RecordListMin[i].DateTimeValue - DateTime.Now).TotalDays < numDaysToKeep) continue;
+                if ((DateTime.Now.Date - RecordListMin[i].DateTimeValue.Date).Days < numDaysToKeep) continue;
                 // too old, remove it
                 RecordListMin.RemoveAt(i);
             }
@@ -179,6 +179,44 @@ namespace Kimono
                     todaysRecordMin.DateTimeValue = DateTime.Now;
                 }
             }
+        }
+
+        /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+        /// <summary>
+        /// Manually add a value 
+        /// </summary>
+        /// <param name="valueIn">the value to add</param>
+        /// <param name="dateTimeIn">the date time to add it</param>
+        public void ManualAddValue(double valueIn, DateTime dateTimeIn)
+        {
+            // if we do not have one then create one. 
+            if (TodaysRecordMax == null)
+            {
+                TodaysRecordMax = new DoubleRecord(valueIn, dateTimeIn);
+                // add it
+                RecordListMax.Add(TodaysRecordMax);
+            }
+
+            if (TodaysRecordMin == null)
+            {
+                TodaysRecordMin = new DoubleRecord(valueIn, dateTimeIn);
+                // add it
+                RecordListMin.Add(TodaysRecordMin);
+            }
+
+            // just set the max
+            if (valueIn > TodaysRecordMax.DoubleValue)
+            {
+                todaysRecordMax.DoubleValue = valueIn;
+                todaysRecordMax.DateTimeValue = dateTimeIn;
+            }
+            // just set the min
+            if (valueIn < TodaysRecordMin.DoubleValue)
+            {
+                todaysRecordMin.DoubleValue = valueIn;
+                todaysRecordMin.DateTimeValue = dateTimeIn;
+            }
+
         }
 
         /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
