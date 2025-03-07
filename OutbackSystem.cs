@@ -172,7 +172,7 @@ namespace Kimono
                 }
 
                 // now the Inverters. We collect them all in order
-                if (portObject.Dev == PortStatus.DEVICE_IDENTIFIER_FXR)
+                if ((portObject.Dev == PortStatus.DEVICE_IDENTIFIER_FXR) || (portObject.Dev == PortStatus.DEVICE_IDENTIFIER_GS))
                 {
                     // set this now
                     InverterDevices.Add(portObject);

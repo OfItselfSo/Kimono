@@ -17,6 +17,10 @@ using System.Reflection;
 using System.Xml.Serialization;
 using OISCommon;
 using org.matheval;
+using ScottPlot.Drawing.Colormaps;
+using ScottPlot.MarkerShapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Security.Cryptography;
 
 /// +------------------------------------------------------------------------------------------------------------------------------+
 /// ¦                                                   TERMS OF USE: MIT License                                                  ¦
@@ -54,12 +58,12 @@ namespace Kimono
         public const string APPLICATION_NAME = "Kimono";
 #endif
         public const int APPLICATIION_MAJOR_VERSION = 1;
-        public const int APPLICATIION_MINOR_VERSION = 2;
-        public const string APPLICATION_VERSION = "01.02";
+        public const int APPLICATIION_MINOR_VERSION = 3;
+        public const string APPLICATION_VERSION = "01.03";
         private const string APPLICATION_HOME = @"http://www.OfItselfSo.com/Kimono/Kimono.php";
 
         private const string WARN01 = "The Kimono software is released under the MIT License. There";
-        private const string WARN02 = "is no warranty or guarantee that the softwre or the information";
+        private const string WARN02 = "is no warranty or guarantee that the software or the information";
         private const string WARN03 = "it displays is without error. You use it, entirely at your own";
         private const string WARN04 = "risk. In particular: ";
         private const string WARN05 = "";
@@ -1913,7 +1917,7 @@ namespace Kimono
                 DialogResult dlgRes = OISMessageBox_YesNo("The configuration options have changed.\n\nDo you wish to save them?");
                 if (dlgRes == DialogResult.Yes)
                 {
-                    LogMessage("frmMain1_FormClosing close SetUserImplicitUserSettings() called");
+                    LogMessage("frmMain1_FormClosing close SetUserExplicitUserSettings() called");
                     SetExplicitUserSettings();
                     WriteExplicitUserSettings(false);
                 }

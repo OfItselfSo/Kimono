@@ -44,6 +44,7 @@ namespace Kimono
         public const string DEVICE_IDENTIFIER_FNDC = "FNDC";
         public const string DEVICE_IDENTIFIER_CC = "CC";
         public const string DEVICE_IDENTIFIER_FXR = "FXR";
+        public const string DEVICE_IDENTIFIER_GS = "GS";
 
         private const int DEFAULT_PORT_NUMBER = -1;
         private bool userDataHasChanged = false;
