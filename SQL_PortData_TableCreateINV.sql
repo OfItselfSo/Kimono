@@ -1,7 +1,7 @@
 ﻿-- this SQL is run in SQLite to create the PortData_INV Table
 -- note that it is an EmbeddedResource in the Properties 
 -- which allows us to have simple access for run and edit
-create table IF NOT EXISTS PortData_INV 
+create table IF NOT EXISTS PortData_INV_v0104
 (
 [id] integer PRIMARY KEY AUTOINCREMENT,
 [RecordDate] date,  -- date on the PC when this record was written
@@ -36,6 +36,16 @@ create table IF NOT EXISTS PortData_INV
 [INV_mode] varchar(30),
 --[Warn] varchar(30),   Not stored
 --[Error varchar(30),   Not stored
-[AUX] varchar(30)
+[AUX] varchar(30),
+-- properties specific to Radian INV ports Kimono v01.04
+[Inv_I_L1] double,
+[Chg_I_L1] double,
+[Buy_I_L1] double,
+[Sell_I_L1] double,
+[VAC1_in_L1] double,
+[VAC2_in_L1] double,
+[VAC_out_L1] double,
+[RELAY] varchar(30)
+
 )
 

@@ -1,5 +1,5 @@
 ﻿-- an insert statement for the PortData_INV Table
-insert into PortData_INV (
+insert into PortData_INV_v0104 (
 [RecordDate],  -- date on the PC when this record was written
 [DeviceAlias],  -- the kimono alias of this 
 [KimonoMajorVer],  -- the kimono version number
@@ -28,7 +28,15 @@ insert into PortData_INV (
 [Batt_V],
 [AC_mode],
 [INV_mode],
-[AUX]
+[AUX],
+[Inv_I_L1],
+[Chg_I_L1],
+[Buy_I_L1],
+[Sell_I_L1],
+[VAC1_in_L1],
+[VAC2_in_L1],
+[VAC_out_L1],
+[RELAY]
 )
 values
 (
@@ -58,5 +66,13 @@ values
 @Batt_V,
 @AC_mode,
 @INV_mode,
-@AUX
+@AUX,
+@Inv_I_L1,
+@Chg_I_L1,
+@Buy_I_L1,
+@Sell_I_L1,
+@VAC1_in_L1,
+@VAC2_in_L1,
+@VAC_out_L1,
+@RELAY
 )

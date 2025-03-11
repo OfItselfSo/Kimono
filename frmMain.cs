@@ -59,7 +59,7 @@ namespace Kimono
 #endif
         public const int APPLICATIION_MAJOR_VERSION = 1;
         public const int APPLICATIION_MINOR_VERSION = 3;
-        public const string APPLICATION_VERSION = "01.03";
+        public const string APPLICATION_VERSION = "01.04";
         private const string APPLICATION_HOME = @"http://www.OfItselfSo.com/Kimono/Kimono.php";
 
         private const string WARN01 = "The Kimono software is released under the MIT License. There";
@@ -1604,6 +1604,7 @@ namespace Kimono
                     OutbackSystemReport = null;
                     // fetch the outback data as JSON, traps its own errors
                     workingJSONReport = GetOutBackData();
+                    
                     if ((workingJSONReport != null) && (workingJSONReport.Length > 0))
                     {
                         // convert into nested objects, but do not make it globally available yet

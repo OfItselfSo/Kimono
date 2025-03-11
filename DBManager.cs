@@ -251,31 +251,35 @@ namespace Kimono
         {
             try
             {
-                LogMessage("Checking if database tables exist");
-                if (ConnectionIsOpen() == false)
-                {
-                    throw new Exception("Database connection is not open");
-                }
+                LogMessage("Creating database tables if they do not exist");
+                // always just create the tables, if they exist it will be ok
+                CreateKimonoTables();
 
-                string sql = "SELECT count(*) FROM sqlite_master WHERE type='table' AND name like 'PortData_%'";
-                SQLiteCommand command = new SQLiteCommand(sql, CurrentConnection);
-                SQLiteDataReader reader = command.ExecuteReader();
-                // the existence of some returning data is enough
-                if (reader.HasRows)
-                {
-                    reader.Read();
-                    int numTables = reader.GetInt32(0);
-                    if(numTables == EXPECTED_NUMBER_OF_KIMONO_PORTDATA_TABLES)
-                    { 
-                        LogMessage("The database tables exist");
-                        return true;
-                    }
-                    else
-                    {
-                        // not correct, we create the tables now
-                        CreateKimonoTables();
-                    }
-                }
+                //LogMessage("Checking if database tables exist");
+                //if (ConnectionIsOpen() == false)
+                //{
+                //    throw new Exception("Database connection is not open");
+                //}
+
+                //string sql = "SELECT count(*) FROM sqlite_master WHERE type='table' AND name like 'PortData_%'";
+                //SQLiteCommand command = new SQLiteCommand(sql, CurrentConnection);
+                //SQLiteDataReader reader = command.ExecuteReader();
+                //// the existence of some returning data is enough
+                //if (reader.HasRows)
+                //{
+                //    reader.Read();
+                //    int numTables = reader.GetInt32(0);
+                //    if(numTables == EXPECTED_NUMBER_OF_KIMONO_PORTDATA_TABLES)
+                //    { 
+                //        LogMessage("The database tables exist");
+                //        return true;
+                //    }
+                //    else
+                //    {
+                //        // not correct, we create the tables now
+                //        CreateKimonoTables();
+                //    }
+                //}
             }
             catch (Exception ex)
             {
@@ -654,6 +658,17 @@ namespace Kimono
                 insertCmd.Parameters.AddWithValue("AC_mode", portObj.AC_mode);
                 insertCmd.Parameters.AddWithValue("INV_mode", portObj.INV_mode);
                 insertCmd.Parameters.AddWithValue("AUX", portObj.AUX);
+                // for Radian - Kiomono V01.04
+                insertCmd.Parameters.AddWithValue("Inv_I_L1", portObj.Inv_I_L1);
+                insertCmd.Parameters.AddWithValue("Chg_I_L1", portObj.Chg_I_L1);
+                insertCmd.Parameters.AddWithValue("Buy_I_L1", portObj.Buy_I_L1);
+                insertCmd.Parameters.AddWithValue("Sell_I_L1", portObj.Sell_I_L1);
+                insertCmd.Parameters.AddWithValue("VAC1_in_L1", portObj.VAC1_in_L1);
+                insertCmd.Parameters.AddWithValue("VAC2_in_L1", portObj.VAC2_in_L1);
+                insertCmd.Parameters.AddWithValue("VAC_out_L1", portObj.VAC_out_L1);
+                insertCmd.Parameters.AddWithValue("RELAY", portObj.RELAY);
+
+
 
                 // run it
                 insertCmd.ExecuteNonQuery();

@@ -144,6 +144,16 @@ namespace Kimono
         public double VAC2_in_L2 { get; set; }
         public double VAC_out_L2 { get; set; }
 
+        // for Radian - Kiomono V01.04
+        public double Inv_I_L1 { get; set; }
+        public double Chg_I_L1 { get; set; }
+        public double Buy_I_L1 { get; set; }
+        public double Sell_I_L1 { get; set; }
+        public double VAC1_in_L1 { get; set; }
+        public double VAC2_in_L1 { get; set; }
+        public double VAC_out_L1 { get; set; }
+        public string RELAY { get; set; }
+
         private double udN01 = 0;
         private double udN02 = 0;
         private double udN03 = 0;

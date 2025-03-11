@@ -187,6 +187,9 @@ namespace Kimono
             string tableRepStr = deviceAlias.TrimEnd(digits);
             if (tableRepStr == null) return null;
             if (tableRepStr.Length == 0) return null;
+            // for Radian Support as of Kimono v0104
+            if (tableRepStr == "INV") tableRepStr = "INV_v0104";
+
             workingSQL = workingSQL.Replace(TABLE_REPSTR, tableRepStr);
 
             // now the dates, the low date is forced to the start of the day, the end date to the end

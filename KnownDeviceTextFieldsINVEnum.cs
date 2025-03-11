@@ -41,6 +41,16 @@ namespace Kimono
         // Batt_V,
         AC_mode,
         INV_mode,
-        AUX
+        AUX,
+        // for Radian - Kiomono V01.04
+        // Inv_I_L1,
+        // Chg_I_L1,
+        // Buy_I_L1,
+        // Sell_I_L1,
+        // VAC1_in_L1,
+        // VAC2_in_L1,
+        // VAC_out_L1,
+        RELAY
+
     }
 }
