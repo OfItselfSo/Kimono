@@ -44,7 +44,7 @@ namespace Kimono
         private string db_name = DEFAULT_DB_NAME;
 
         // this is the number of PortData_* tables that we expect to see
-        private int EXPECTED_NUMBER_OF_KIMONO_PORTDATA_TABLES = 5;
+    //    private int EXPECTED_NUMBER_OF_KIMONO_PORTDATA_TABLES = 5;
         /// +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
         /// <summary>
         /// Constructor 
@@ -376,7 +376,7 @@ namespace Kimono
             using (StreamReader reader = new StreamReader(stream))
             {
                 string sql = reader.ReadToEnd();
-                sql = sql.Replace("%TABLE_ID%", "INV");
+                sql = sql.Replace("%TABLE_ID%", "INV_v0104");
                 SQLiteCommand command = new SQLiteCommand(sql, CurrentConnection);
                 command.ExecuteNonQuery();
             }
